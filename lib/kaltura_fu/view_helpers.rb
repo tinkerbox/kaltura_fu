@@ -2,9 +2,8 @@ module KalturaFu
   module ViewHelpers
     
     def include_kaltura_fu(*args)
-      content = javascript_include_tag()
-      content << "\n#{stylesheet_link_tag('')}"
-      content << "\n#{stylesheet_link_tag('')}"                                
+      content = javascript_include_tag('kaltura_upload')
+      #content << "\n#{stylesheet_link_tag('')}"                         
     end
     
     #returns a thumbnail image
