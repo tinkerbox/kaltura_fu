@@ -37,19 +37,25 @@ Kaltura_fu provides three ActionView helper methods presently:
 include_kaltura_fu embeds the kaltura_upload.js into the header.
 
 kaltura_thumbnail(entry_id, options={}) has the following parameters:
+
 * entry_id - The Kaltura entry_id of which you want to display a thumbnail
 * hash of options.  The supported options are:
+
 	:size=> Array of integers.  [width,height].  This can be defaulted in the config with thumb_width and thumb_height.
 	:second=> Integer.  Specify the second of the video to create the thumbnail with.
 	
 kaltura_player_embed(entry_id,options={}) has the following parameters:
+
 * entry_id - The Kaltura entry_id that you want to display in the player.
 * hash of options.  The supported options are:
+
 	:div_id=> String.  Specifies the div ID of the object that will be embeded.  Defaults to kplayer.
 	:player_conf_id=> String.  The configuration ID of the player to use.  This can be defaulted in the config with player_conf_id.
 	
 kaltura_upload_embed(options={}) has the following parameters:
+
 * hash of options:  The supported options are:
+
 	none at this time.
 	
 
