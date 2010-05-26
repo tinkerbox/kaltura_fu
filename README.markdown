@@ -1,9 +1,9 @@
 kaltura_fu
 --------------
-**Homepage**: [http://github.com/patricksrobertson/kaltura_fu](http://github.com/patricksrobertson/kaltura_fu)
+**Homepage**: [http://www.velir.com](http://www.velir.com)
 **Author**: [Patrick Robertson](mailto:patrick.robertson@velir.com)
 **Copyright**: 2010
-**License**: [MIT License](file:LICENSE)
+**License**: [MIT License](file:MIT-LICENSE)
 
 About Kaltura
 ----------------
@@ -36,4 +36,4 @@ To Do's
 * Extract the upload javascript into the plugin and setup an installer and include tag.
 * Buff the options for the upload script a bit more.  
 
-Copyright (c) 2010 [Patrick Robertson](http://p-rob.me), released under the MIT license
+Copyright (c) 2010 [Patrick Robertson](http://www.velir.com), released under the MIT license
