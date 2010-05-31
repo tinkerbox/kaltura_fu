@@ -27,7 +27,7 @@ This will install the config/kaltura.yml file into your application's root direc
 
 Usage:
 ------
-Kaltura_fu provides three ActionView helper methods presently:
+Kaltura_fu provides four ActionView helper methods presently:
 
 * include_kaltura_fu
 * kaltura_thumbnail(entry_id, options={})
