@@ -62,6 +62,6 @@ describe KalturaFu, :type => :helper do
     html.should have_tag("script",%r{swfobject.embedSWF})
     html.should have_tag("script",%r{http://www.kaltura.com/kwidget/wid/_#{KalturaFu.config[:partner_id]}})
     html.should have_tag("script",%r{/ui_conf_id/#{KalturaFu.config[:player_conf_id]}})
-    html.should have_tag("script",%r{"kplayer", "400","300"})
+    html.should have_tag("script",%r{"kplayer", "400","330"})
   end 
 end
