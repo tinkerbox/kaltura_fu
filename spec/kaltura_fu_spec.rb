@@ -70,7 +70,7 @@ describe KalturaFu, :type => :helper do
         %r{/ui_conf_id/#{KalturaFu.config[:player_conf_id]}})
     else
       html.should have_tag("script",
-	%r{/ui_conf_id/waffles})
+	%r{/ui_conf_id/}+ KalturaFu::ViewHelpers::DEFAULT_KPLAYER)
     end
     html.should have_tag("script",%r{"kplayer","400","330"})
   end
