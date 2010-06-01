@@ -1,7 +1,7 @@
 module KalturaFu
   module ViewHelpers
 
-    DEFAULT_KPLAYER = 1339442
+    DEFAULT_KPLAYER = '1339442'
     
     def include_kaltura_fu(*args)
       content = javascript_include_tag('kaltura_upload')
