@@ -49,6 +49,15 @@ describe KalturaFu, :type => :helper do
   it "should embed a default player" do
     html = helper.kaltura_player_embed(12345)
 
+    # check the parameters
+    html.should have_tag("script",%r{allowscriptaccess: "always"})
+    html.should have_tag("script",%r{allownetworking: "all"})
+    html.should have_tag("script",%r{allowfullscreen: "true"})
+    html.should have_tag("script",%r{wmode: "opaque"})
+
+    # check the vars
     html.should have_tag("script",%r{entryId: "12345"})  
+
+    # check the embed
   end 
 end
