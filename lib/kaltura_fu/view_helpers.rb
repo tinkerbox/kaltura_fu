@@ -1,5 +1,7 @@
 module KalturaFu
   module ViewHelpers
+
+    DEFAULT_KPLAYER = 1339442
     
     def include_kaltura_fu(*args)
       content = javascript_include_tag('kaltura_upload')
@@ -45,9 +47,9 @@ module KalturaFu
         player_conf_parameter += "#{options[:player_conf_id]}"
       else
         unless KalturaFu.config[:player_conf_id].nil?
-          player_conf_parameter = "/ui_conf_id/#{KalturaFu.config[:player_conf_id]}"
+          player_conf_parameter += "#{KalturaFu.config[:player_conf_id]}"
 	else
-	  player_conf_paramter = ""
+	  player_conf_paramter += "#{DEFAULT_KPLAYER}"
         end
       end
       
