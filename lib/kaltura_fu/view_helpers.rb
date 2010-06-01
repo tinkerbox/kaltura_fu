@@ -44,6 +44,14 @@ module KalturaFu
     def kaltura_player_embed(entry_id,options={})
       player_conf_parameter = "/ui_conf_id/"
       options[:div_id] ||= "kplayer"
+      options[:size] ||= []
+      width = PLAYER_WIDTH
+      height = PLAYER_HEIGHT
+
+      unless options[:size].empty?
+	width = options[:size].first
+	height = options[:size].last
+      end
     
       unless options[:player_conf_id].nil?
         player_conf_parameter += "#{options[:player_conf_id]}"
@@ -67,7 +75,7 @@ module KalturaFu
       		entryId: \"#{entry_id}\"
       	};
 
-      	swfobject.embedSWF(\"http://www.kaltura.com/kwidget/wid/_#{KalturaFu.config[:partner_id]}" + player_conf_parameter + "\",\"#{options[:div_id]}\",\"#{PLAYER_WIDTH}\",\"#{PLAYER_HEIGHT}\",\"9.0.0\",false,flashVars,params);
+      	swfobject.embedSWF(\"http://www.kaltura.com/kwidget/wid/_#{KalturaFu.config[:partner_id]}" + player_conf_parameter + "\",\"#{options[:div_id]}\",\"#{width}\",\"#{height}\",\"9.0.0\",false,flashVars,params);
       </script>"
     end
     
