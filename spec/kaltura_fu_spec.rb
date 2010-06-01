@@ -43,7 +43,7 @@ describe KalturaFu, :type => :helper do
 
     html.should have_tag("img[src = ?]", "http://www.kaltura.com/p/" +
 			 KalturaFu.config[:partner_id] +
-			 "/thumbnail/entry_id/12345" + "/width/800" +
-			 "height/600" + "/vid_sec/6")
+			 "/thumbnail/entry_id/12345" + "/vid_sec/6" +
+			 "/width/800/height/600")
   end 
 end
