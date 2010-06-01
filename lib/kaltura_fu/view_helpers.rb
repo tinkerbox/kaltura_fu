@@ -46,10 +46,10 @@ module KalturaFu
       unless options[:player_conf_id].nil?
         player_conf_parameter += "#{options[:player_conf_id]}"
       else
-        unless KalturaFu.config[:player_conf_id].empty?
+        unless KalturaFu.config[:player_conf_id].nil?
           player_conf_parameter += "#{KalturaFu.config[:player_conf_id]}"
 	else
-	  player_conf_paramter += "#{DEFAULT_KPLAYER}"
+	  player_conf_parameter += "#{DEFAULT_KPLAYER}"
         end
       end
       
