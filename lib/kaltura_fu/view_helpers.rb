@@ -26,7 +26,7 @@ module KalturaFu
         seconds_parameter = "/vid_sec/#{options[:second]}"
       end
       
-      image_tag("http://www.kaltura.com/p/203822/thumbnail/entry_id/#{entry_id}" + seconds_parameter + size_parameters)
+      image_tag("http://www.kaltura.com/p/#{KalturaFu.config[:partner_id]}/thumbnail/entry_id/#{entry_id}" + seconds_parameter + size_parameters)
     end
     
     #returns a kaltura player embed object
