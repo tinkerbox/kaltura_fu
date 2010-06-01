@@ -2,6 +2,8 @@ module KalturaFu
   module ViewHelpers
 
     DEFAULT_KPLAYER = '1339442'
+    PLAYER_WIDTH = '400'
+    PLAYER_HEIGHT = '330'
     
     def include_kaltura_fu(*args)
       content = javascript_include_tag('kaltura_upload')
@@ -65,7 +67,7 @@ module KalturaFu
       		entryId: \"#{entry_id}\"
       	};
 
-      	swfobject.embedSWF(\"http://www.kaltura.com/kwidget/wid/_#{KalturaFu.config[:partner_id]}" + player_conf_parameter + "\",\"#{options[:div_id]}\",\"400\",\"330\",\"9.0.0\",false,flashVars,params);
+      	swfobject.embedSWF(\"http://www.kaltura.com/kwidget/wid/_#{KalturaFu.config[:partner_id]}" + player_conf_parameter + "\",\"#{options[:div_id]}\",\"#{PLAYER_WIDTH}\",\"#{PLAYER_HEIGHT}\",\"9.0.0\",false,flashVars,params);
       </script>"
     end
     
