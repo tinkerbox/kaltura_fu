@@ -3,7 +3,7 @@ module KalturaFu
     
     def include_kaltura_fu(*args)
       content = javascript_include_tag('kaltura_upload')
-      content << javascript_include_tag('http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js')
+      content << "\n#{javascript_include_tag('http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js')}"
       #content << "\n#{stylesheet_link_tag('')}"                         
     end
     
