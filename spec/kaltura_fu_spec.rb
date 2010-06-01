@@ -33,7 +33,7 @@ describe KalturaFu, :type => :helper do
   it "should create an appropriately sized thumbnail" do
     html = helper.kaltura_thumbnail(12345,:size=>[800,600])
 
-    html.should have_tag("img[src = ?", "http://www.kaltura.com/p/" +
+    html.should have_tag("img[src = ?]", "http://www.kaltura.com/p/" +
 			 KalturaFu.config[:partner_id] +
 			 "/thumbnail/entry_id/12345" + "/width/800" +
 			 "/height/600")
