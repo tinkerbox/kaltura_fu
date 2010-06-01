@@ -38,14 +38,16 @@ module KalturaFu
     
     #returns a kaltura player embed object
     def kaltura_player_embed(entry_id,options={})
-      player_conf_parameter = ""
+      player_conf_parameter = "/ui_conf_id/"
       options[:div_id] ||= "kplayer"
-      
+    
       unless options[:player_conf_id].nil?
-        player_conf_parameter = "/ui_conf_id/#{options[:player_conf_id]}"
+        player_conf_parameter += "#{options[:player_conf_id]}"
       else
         unless KalturaFu.config[:player_conf_id].nil?
           player_conf_parameter = "/ui_conf_id/#{KalturaFu.config[:player_conf_id]}"
+	else
+	  player_conf_paramter = "
         end
       end
       
