@@ -47,7 +47,7 @@ module KalturaFu
         unless KalturaFu.config[:player_conf_id].nil?
           player_conf_parameter = "/ui_conf_id/#{KalturaFu.config[:player_conf_id]}"
 	else
-	  player_conf_paramter = "
+	  player_conf_paramter = ""
         end
       end
       
