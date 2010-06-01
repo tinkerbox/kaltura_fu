@@ -45,5 +45,10 @@ describe KalturaFu, :type => :helper do
 			 KalturaFu.config[:partner_id] +
 			 "/thumbnail/entry_id/12345" + "/vid_sec/6" +
 			 "/width/800/height/600")
+  end
+  it "should embed a default player" do
+    html = helper.kaltura_player_embed(12345)
+
+    html.should have_tag("script",%r{entryId: "12345"})  
   end 
 end
