@@ -6,8 +6,8 @@ describe KalturaFu, :type => :helper do
     html = helper.include_kaltura_fu
     
     html.should have_tag("script[src= ?]", 
-			 "http://ajax.googleapis.com/ajax/libs/swfobject/2.2
-			  /swfobject.js" )
+			 "http://ajax.googleapis.com/ajax/libs/swfobject" + 
+			 "/2.2/swfobject.js" )
 
     html.should have_tag("script[src = ?]",
 			 %r{/javascripts/kaltura_upload.js\?[0-9]*})    
