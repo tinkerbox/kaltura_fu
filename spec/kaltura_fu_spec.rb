@@ -13,9 +13,17 @@ describe KalturaFu, :type => :helper do
   it "should create a plain thumbnail" do
     html = helper.kaltura_thumbnail(12345)
 
-    html.should have_tag("img[src = ?]" ,
-			 "http://www.kaltura.com/p/" + KalturaFu.config[:partner_id] +
-			 "/thumbnail/entry_id/12345" + %r{/width/[0-9]*/height/[0-9]*})
+
+    if KalturaFu.config[:thumb_width] && KalturaFu.config[:thumb_height]
+      html.should have_tag("img[src = ?]" ,
+			   "http://www.kaltura.com/p/" + KalturaFu.config[:partner_id]				 + "/thumbnail/entry_id/12345" + 
+			   "/width/" + KalturaFu.config[:thumb_width] + 
+			   "/height/" + KalturaFu.config[:thumb_height])
+    else
+      html.should have_tag("img[src = ?]", 
+			   "http://www.kaltura.com/p/" + KalturaFu.config[:partner_id]
+			   + "/thumbnail/entry_id/12345"
+    end
   end
 
 end
