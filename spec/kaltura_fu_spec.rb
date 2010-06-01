@@ -68,10 +68,9 @@ describe KalturaFu, :type => :helper do
     if KalturaFu.config[:player_conf_id]
       html.should have_tag("script",
         %r{/ui_conf_id/#{KalturaFu.config[:player_conf_id]}})
-    else
-      waffles = '1332'
+    else 
       html.should have_tag("script",
-	%r{/ui_conf_id/#{waffles}})
+	%r{/ui_conf_id/#{KalturaFu::ViewHelpers::DEFAULT_KPLAYER}})
     end
     html.should have_tag("script",%r{"kplayer","400","330"})
   end
@@ -94,8 +93,13 @@ describe KalturaFu, :type => :helper do
     html.should have_tag("script",%r{swfobject.embedSWF})
     html.should have_tag("script",
       %r{http://www.kaltura.com/kwidget/wid/_#{KalturaFu.config[:partner_id]}})
-    html.should have_tag("script",
-      %r{/ui_conf_id/#{KalturaFu.config[:player_conf_id]}})
+    if Kaltura.config[:player_conf_id]
+      html.should have_tag("script",
+        %r{/ui_conf_id/#{KalturaFu.config[:player_conf_id]}})
+    else
+      html.should have_tag("script",
+	%r{/ui_conf_id/#{KalturaFu::ViewHelpers::DEFAULT_KPLAYER}})
+    end
     html.should have_tag("script",%r{"waffles","400","330"})
   end 
 
