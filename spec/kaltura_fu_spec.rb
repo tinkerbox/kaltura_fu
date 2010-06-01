@@ -94,4 +94,29 @@ describe KalturaFu, :type => :helper do
     html.should have_tag("script",%r{"waffles","400","330"})
   end 
 
+  it "should embed a player with a different config id" do
+    html = helper.kaltura_player_embed(12345, :player_conf_id=>"1234")
+
+    #check the outer div
+    html.should have_tag("div#kplayer")
+
+    # check the parameters
+    html.should have_tag("script",%r{allowscriptaccess: "always"})
+    html.should have_tag("script",%r{allownetworking: "all"})
+    html.should have_tag("script",%r{allowfullscreen: "true"})
+    html.should have_tag("script",%r{wmode: "opaque"})
+
+    # check the vars
+    html.should have_tag("script",%r{entryId: "12345"})  
+
+    # check the embed
+    html.should have_tag("script",%r{swfobject.embedSWF})
+    html.should have_tag("script",
+      %r{http://www.kaltura.com/kwidget/wid/_#{KalturaFu.config[:partner_id]}})
+    html.should have_tag("script",
+      %r{/ui_conf_id/1234})
+    html.should have_tag("script",%r{"kplayer","400","330"})
+  end 
+
+
 end
