@@ -7,7 +7,7 @@ describe KalturaFu, :type => :helper do
     
     html.should have_tag("script[src= ?]", "http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js" )
 
-    html.should have_tag("script[src = ?]",/^/javascripts/kaltura_upload.js?*[0-9]/)    
+    html.should have_tag("script[src = ?]",%r{/javascripts/kaltura_upload.js?*[0-9]})    
   end
 
 end
