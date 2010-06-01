@@ -14,7 +14,7 @@ describe KalturaFu, :type => :helper do
     html = helper.kaltura_thumbnail(12345)
 
     html.should have_tag("img[src = ?]" ,
-			 "http://www.kaltura.com/" + KalturaFu.config[:partner_id] +
+			 "http://www.kaltura.com/p/" + KalturaFu.config[:partner_id] +
 			 "/thumbnail/entry_id/12345")
   end
 
