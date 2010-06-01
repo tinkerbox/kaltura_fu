@@ -63,17 +63,16 @@ describe KalturaFu, :type => :helper do
 
     # check the embed
     html.should have_tag("script",%r{swfobject.embedSWF})
-    if KalturaFu.config[:partner_id]
+    html.should have_tag("script",
+      %r{http://www.kaltura.com/kwidget/wid/_#{KalturaFu.config[:partner_id]}})
+    if KalturaFu.config[:player_conf_id]
       html.should have_tag("script",
-        %r{http://www.kaltura.com/kwidget/wid/_#{KalturaFu.config[:partner_id]}})
+        %r{/ui_conf_id/#{KalturaFu.config[:player_conf_id]}})
     else
       html.should have_tag("script",
-	%r{http://www.kaltura.com/kwidget/wid/_#{KalturaFu::ViewHelpers::DEFAULT_KPLAYER}})
+	%r{/ui_conf_id/#{KalturaFu.config[:player_conf_id]}})
     end
-    html.should have_tag("script",
-      %r{/ui_conf_id/#{KalturaFu.config[:player_conf_id]}})
     html.should have_tag("script",%r{"kplayer","400","330"})
-  end 
 
   it "should embed a player with a different div" do
     html = helper.kaltura_player_embed(12345,:div_id=>"waffles")
