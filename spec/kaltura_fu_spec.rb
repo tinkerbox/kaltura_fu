@@ -16,13 +16,14 @@ describe KalturaFu, :type => :helper do
 
     if KalturaFu.config[:thumb_width] && KalturaFu.config[:thumb_height]
       html.should have_tag("img[src = ?]" ,
-			   "http://www.kaltura.com/p/" + KalturaFu.config[:partner_id]				 + "/thumbnail/entry_id/12345" + 
+			   "http://www.kaltura.com/p/" + KalturaFu.config[:partner_id +
+			   "/thumbnail/entry_id/12345" + 
 			   "/width/" + KalturaFu.config[:thumb_width] + 
 			   "/height/" + KalturaFu.config[:thumb_height])
     else
       html.should have_tag("img[src = ?]", 
-			   "http://www.kaltura.com/p/" + KalturaFu.config[:partner_id]
-			   + "/thumbnail/entry_id/12345")
+			   "http://www.kaltura.com/p/" + KalturaFu.config[:partner_id +
+			   "/thumbnail/entry_id/12345")
     end
   end
 
