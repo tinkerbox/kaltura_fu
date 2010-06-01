@@ -73,7 +73,7 @@ describe KalturaFu, :type => :helper do
 	%r{/ui_conf_id/#{KalturaFu.config[:player_conf_id]}})
     end
     html.should have_tag("script",%r{"kplayer","400","330"})
-
+  end
   it "should embed a player with a different div" do
     html = helper.kaltura_player_embed(12345,:div_id=>"waffles")
 
