@@ -117,7 +117,7 @@ module KalturaFu
       options[:div_id] ||= "kplayer"
 
       options[:onclick] = "$(#{options[:div_id]}).get(0).sendNotification('doSeek',#{seek_time});window.scrollTo(0,0);return false;"
-
+      options.delete(:div_id)
       link_to(content,"#", options)
     end
   end
