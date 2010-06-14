@@ -155,5 +155,12 @@ describe KalturaFu, :type => :helper do
     end
     html.should have_tag("script",%r{"kplayer","200","170"})
   end
+  
+  it "should seek to a time in seconds when asked" do
+    html = helper.kaltura_seek_link("Seek to 5 seconds","5")
+    html.should have_tag("a[href=\"#\"]", "Seek to 5 seconds")
+    html.should have_tag("a[onclick=\"$(kplayer).get(0).sendNotification(\'doSeek\',5);window.scrollTo(0,0);return false;\"]")
+    html.should_not have_tag("a[div_id=\"kplayer\"]")
+  end
 
 end

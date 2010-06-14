@@ -8,8 +8,7 @@ module KalturaFu
     def include_kaltura_fu(*args)
       content = javascript_include_tag('kaltura_upload')
       content << "\n#{javascript_include_tag('http://ajax.googleapis.com' + 
-		 '/ajax/libs/swfobject/2.2/swfobject.js')}"
-      #content << "\n#{stylesheet_link_tag('')}"                         
+		 '/ajax/libs/swfobject/2.2/swfobject.js')}" 
     end
     
     #returns a thumbnail image
@@ -23,7 +22,7 @@ module KalturaFu
 			  "#{options[:size].last}"
       else
         # if the thumbnail width and height are defined in the config,
-	# use it, assuming it wasn't locally overriden
+	      # use it, assuming it wasn't locally overriden
         if KalturaFu.config[:thumb_width] && KalturaFu.config[:thumb_height]
           size_parameters = "/width/#{KalturaFu.config[:thumb_width]}/height/" +
 			    "#{KalturaFu.config[:thumb_height]}"
@@ -49,8 +48,8 @@ module KalturaFu
       height = PLAYER_HEIGHT
 
       unless options[:size].empty?
-	width = options[:size].first
-	height = options[:size].last
+	      width = options[:size].first
+	      height = options[:size].last
       end
     
       unless options[:player_conf_id].nil?
@@ -58,8 +57,8 @@ module KalturaFu
       else
         unless KalturaFu.config[:player_conf_id].nil?
           player_conf_parameter += "#{KalturaFu.config[:player_conf_id]}"
-	else
-	  player_conf_parameter += "#{DEFAULT_KPLAYER}"
+	      else
+	        player_conf_parameter += "#{DEFAULT_KPLAYER}"
         end
       end
       
@@ -72,10 +71,16 @@ module KalturaFu
       		wmode: \"opaque\"
       	};
       	var flashVars = {
-      		entryId: \"#{entry_id}\"
+      		entryId: \"#{entry_id}\",
+      		emptyF: \"onKdpEmpty\",
+      		readyF: \"onKdpReady\"
+      	};
+      	var attributes = {
+          id: \"#{options[:div_id]}\",
+          name: \"#{options[:div_id]}\"
       	};
 
-      	swfobject.embedSWF(\"http://www.kaltura.com/kwidget/wid/_#{KalturaFu.config[:partner_id]}" + player_conf_parameter + "\",\"#{options[:div_id]}\",\"#{width}\",\"#{height}\",\"9.0.0\",false,flashVars,params);
+      	swfobject.embedSWF(\"http://www.kaltura.com/kwidget/wid/_#{KalturaFu.config[:partner_id]}" + player_conf_parameter + "\",\"#{options[:div_id]}\",\"#{width}\",\"#{height}\",\"9.0.0\",false,flashVars,params,attributes);
       </script>"
     end
     
@@ -107,5 +112,15 @@ module KalturaFu
 
     	</script>"
     end
+    
+    def kaltura_seek_link(content,seek_time,options={})
+      options[:div_id] ||= "kplayer"
+
+      options[:onclick] = "$(#{options[:div_id]}).get(0).sendNotification('doSeek',#{seek_time});window.scrollTo(0,0);return false;"
+
+      link_to(content,"#", options)
+    end
   end
+  
+  
 end
