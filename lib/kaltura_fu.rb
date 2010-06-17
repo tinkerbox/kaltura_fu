@@ -15,5 +15,5 @@ class Hash
 end
 
 module KalturaFu
-  autoload :Config. 'kaltura_fu/config'
+  autoload :Config, 'kaltura_fu/config'
 end
