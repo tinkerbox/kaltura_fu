@@ -44,12 +44,18 @@ module KalturaFu
       player_conf_parameter = "/ui_conf_id/"
       options[:div_id] ||= "kplayer"
       options[:size] ||= []
+      options[:use_url] ||= false
       width = PLAYER_WIDTH
       height = PLAYER_HEIGHT
+      source_type = "entryId"
 
       unless options[:size].empty?
 	      width = options[:size].first
 	      height = options[:size].last
+      end
+      
+      if options[:use_url] == true
+        source_type = "url"
       end
     
       unless options[:player_conf_id].nil?
@@ -71,9 +77,10 @@ module KalturaFu
       		wmode: \"opaque\"
       	};
       	var flashVars = {
+      		sourceType: \"#{source_type}\",      	  
       		entryId: \"#{entry_id}\",
       		emptyF: \"onKdpEmpty\",
-      		readyF: \"onKdpReady\"
+      		readyF: \"onKdpReady\",
       	};
       	var attributes = {
           id: \"#{options[:div_id]}\",
@@ -108,7 +115,7 @@ module KalturaFu
     			jsDelegate: \"delegate\"
     		};
 
-        swfobject.embedSWF(\"http://www.kaltura.com/kupload/ui_conf_id/1103\", \"uploader\", \"200\", \"30\", \"9.0.0\", \"expressInstall.swf\", flashVars, params,attributes);
+        swfobject.embedSWF(\"http://www.kaltura.com/kupload/ui_conf_id/1103\", \"uploader\", \"160\", \"26\", \"9.0.0\", \"expressInstall.swf\", flashVars, params,attributes);
 
     	</script>"
     end
