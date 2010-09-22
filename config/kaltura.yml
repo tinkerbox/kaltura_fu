@@ -9,6 +9,7 @@ base: &base
   thumb_width: '300'
   thumb_height: '300'
   player_conf_id: 'whatever'
+  service_url: 'http://www.kaltura.com'
 
 development:
   <<: *base

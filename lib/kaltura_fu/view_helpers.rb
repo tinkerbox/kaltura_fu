@@ -31,6 +31,8 @@ module KalturaFu
       
       unless options[:second].nil?
         seconds_parameter = "/vid_sec/#{options[:second]}"
+      else
+        seconds_parameter = "/vid_sec/5"
       end
       
       image_tag("http://www.kaltura.com/p/#{KalturaFu.config[:partner_id]}" +
@@ -48,10 +50,15 @@ module KalturaFu
       width = PLAYER_WIDTH
       height = PLAYER_HEIGHT
       source_type = "entryId"
+      flavor_id = nil
 
       unless options[:size].empty?
 	      width = options[:size].first
 	      height = options[:size].last
+      end
+      
+      if options[:source] == "flv"
+        flavor_id = "flashVars.flavorId = \"" +  KalturaFu.get_original_flavor(entry_id) + "\";"
       end
       
       if options[:use_url] == true
@@ -76,18 +83,22 @@ module KalturaFu
       		allowfullscreen: \"true\",
       		wmode: \"opaque\"
       	};
-      	var flashVars = {
-      		sourceType: \"#{source_type}\",      	  
-      		entryId: \"#{entry_id}\",
-      		emptyF: \"onKdpEmpty\",
-      		readyF: \"onKdpReady\",
-      	};
+      	var flashVars = {};
+      	flashVars.sourceType = \"#{source_type}\";      	  
+      	flashVars.entryId = \"#{entry_id}\";
+      	flashVars.emptyF = \"onKdpEmpty\";
+    		flashVars.readyF = \"onKdpReady\";
+    		flashVars['commentDisplay.commentUrl'] = \"#{options[:comment_url]}\";
+    		flashVars['commentAdd.currentUserUrl'] = \"#{options[:current_user_url]}.xml\";
+    		flashVars['commentAdd.commentPostUrl'] = \"#{options[:comment_post_url]}\";
+    		#{flavor_id}
+      		
       	var attributes = {
           id: \"#{options[:div_id]}\",
           name: \"#{options[:div_id]}\"
       	};
 
-      	swfobject.embedSWF(\"http://www.kaltura.com/kwidget/wid/_#{KalturaFu.config[:partner_id]}" + player_conf_parameter + "\",\"#{options[:div_id]}\",\"#{width}\",\"#{height}\",\"9.0.0\",false,flashVars,params,attributes);
+      	swfobject.embedSWF(\"http://www.kaltura.com/kwidget/wid/_#{KalturaFu.config[:partner_id]}" + player_conf_parameter + "\",\"#{options[:div_id]}\",\"#{width}\",\"#{height}\",\"10.0.0\",\"http://ttv.mit.edu/swfs/expressinstall.swf\",flashVars,params,attributes);
       </script>"
     end
     
@@ -112,7 +123,9 @@ module KalturaFu
     			entryId: \"-1\",
     			ks: \"#{KalturaFu.session_key}\",
     			uiConfId: '1103',
-    			jsDelegate: \"delegate\"
+    			jsDelegate: \"delegate\",
+    			maxFileSize: \"999999999\",
+    			maxTotalSize: \"999999999\"
     		};
 
         swfobject.embedSWF(\"http://www.kaltura.com/kupload/ui_conf_id/1103\", \"uploader\", \"160\", \"26\", \"9.0.0\", \"expressInstall.swf\", flashVars, params,attributes);
