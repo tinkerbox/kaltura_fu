@@ -1,7 +1,3 @@
-require 'kaltura_fu/video'
-require 'kaltura_fu/category'
-require 'kaltura_fu/report'
-
 ##
 # @private
 ##
@@ -35,9 +31,10 @@ end
 #   KalturaFu.clear_session_key! #=> nil
 ##
 module KalturaFu
-  include KalturaFu::Video
-  include KalturaFu::Category
-  include KalturaFu::Report
+  autoload :Video, 'kaltura_fu/video'
+  autoload :Category, 'kaltura_fu/category'
+  autoload :Report, 'kaltura_fu/report'
+  
   # Kaltura's ready state.
   READY = Kaltura::Constants::FlavorAssetStatus::READY
   

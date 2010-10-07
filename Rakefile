@@ -11,7 +11,6 @@ begin
     gem.homepage = "http://github.com/Velir/kaltura_fu"
     gem.authors = ["Patrick Robertson"]
     gem.add_dependency('velir_kaltura-ruby', '>=0.4.3')
-    gem.add_dependency('rails','>=2.3.8')
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 
