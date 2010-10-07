@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{kaltura_fu}
-  s.version = "0.1.0.prel"
+  s.version = "0.1.1.prel"
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Patrick Robertson"]
@@ -20,9 +20,10 @@ Gem::Specification.new do |s|
      "README.markdown",
      "Rakefile",
      "VERSION.yml",
-     "config/kaltura.yml",
+     "generators/kaltura_fu_install/kaltura_fu_install_generator.rb",
+     "generators/kaltura_fu_install/templates/kaltura.yml",
+     "generators/kaltura_fu_install/templates/kaltura_upload.js",
      "install.rb",
-     "javascripts/kaltura_upload.js",
      "kaltura_fu.gemspec",
      "lib/kaltura_fu.rb",
      "lib/kaltura_fu/category.rb",
