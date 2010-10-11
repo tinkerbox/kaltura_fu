@@ -31,6 +31,8 @@ end
 #   KalturaFu.clear_session_key! #=> nil
 ##
 module KalturaFu
+  
+  require 'kaltura_fu/railtie' if defined?(Rails) && Rails.version.split(".").first == "3"
   autoload :Video, 'kaltura_fu/video'
   autoload :Category, 'kaltura_fu/category'
   autoload :Report, 'kaltura_fu/report'

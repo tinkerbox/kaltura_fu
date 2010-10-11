@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{kaltura_fu}
-  s.version = "0.1.1.prel"
+  s.version = "0.1.2.prel"
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Patrick Robertson"]
-  s.date = %q{2010-10-07}
+  s.date = %q{2010-10-11}
   s.email = %q{patrick.robertson@velir.com}
   s.extra_rdoc_files = [
     "README.markdown"
@@ -27,13 +27,13 @@ Gem::Specification.new do |s|
      "kaltura_fu.gemspec",
      "lib/kaltura_fu.rb",
      "lib/kaltura_fu/category.rb",
+     "lib/kaltura_fu/railtie.rb",
      "lib/kaltura_fu/report.rb",
      "lib/kaltura_fu/video.rb",
      "lib/kaltura_fu/view_helpers.rb",
      "rails/init.rb",
      "spec/kaltura_fu_spec.rb",
      "spec/spec_helper.rb",
-     "tasks/kaltura_fu_tasks.rake",
      "test/kaltura_fu_test.rb",
      "test/test_helper.rb",
      "uninstall.rb"
