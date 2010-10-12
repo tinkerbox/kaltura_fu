@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{kaltura_fu}
-  s.version = "0.1.2.prel"
+  s.version = "0.1.3.prel"
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Patrick Robertson"]
-  s.date = %q{2010-10-11}
+  s.date = %q{2010-10-12}
   s.email = %q{patrick.robertson@velir.com}
   s.extra_rdoc_files = [
     "README.markdown"
