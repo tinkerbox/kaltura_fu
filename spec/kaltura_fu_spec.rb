@@ -1,166 +1,57 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
-describe KalturaFu, :type => :helper do 
-
-  it "should have the proper javascript include tags" do
-    html = helper.include_kaltura_fu
-    
-    html.should have_tag("script[src= ?]", 
-			 "http://ajax.googleapis.com/ajax/libs/swfobject" + 
-			 "/2.2/swfobject.js" )
-
-    html.should have_tag("script[src = ?]",
-			 %r{/javascripts/kaltura_upload.js\?[0-9]*})    
-  end
-
-  it "should create a plain thumbnail" do
-    html = helper.kaltura_thumbnail(12345)
-
-
-    if KalturaFu.config[:thumb_width] && KalturaFu.config[:thumb_height]
-      html.should have_tag("img[src = ?]" , "http://www.kaltura.com/p/" + 
-			   KalturaFu.config[:partner_id] + 
-			   "/thumbnail/entry_id/12345" + "/width/" + 
-			   KalturaFu.config[:thumb_width] + "/height/" + 
-			   KalturaFu.config[:thumb_height])
-    else
-      html.should have_tag("img[src = ?]", 
-			   "http://www.kaltura.com/p/" + 
-			   KalturaFu.config[:partner_id] +
-			   "/thumbnail/entry_id/12345")
-    end
-  end
-  it "should create an appropriately sized thumbnail" do
-    html = helper.kaltura_thumbnail(12345,:size=>[800,600])
-
-    html.should have_tag("img[src = ?]", "http://www.kaltura.com/p/" +
-			 KalturaFu.config[:partner_id] +
-			 "/thumbnail/entry_id/12345" + "/width/800" +
-			 "/height/600")
-  end
-  it "should create a thumbnail at the right second" do
-    html = helper.kaltura_thumbnail(12345,:size=>[800,600],:second=> 6)
-
-    html.should have_tag("img[src = ?]", "http://www.kaltura.com/p/" +
-			 KalturaFu.config[:partner_id] +
-			 "/thumbnail/entry_id/12345" + "/vid_sec/6" +
-			 "/width/800/height/600")
-  end
-  it "should embed a default player" do
-    html = helper.kaltura_player_embed(12345)
-
-    #check the outer div
-    html.should have_tag("div#kplayer")
-
-    # check the parameters
-    html.should have_tag("script",%r{allowscriptaccess: "always"})
-    html.should have_tag("script",%r{allownetworking: "all"})
-    html.should have_tag("script",%r{allowfullscreen: "true"})
-    html.should have_tag("script",%r{wmode: "opaque"})
-
-    # check the vars
-    html.should have_tag("script",%r{entryId: "12345"})  
-
-    # check the embed
-    html.should have_tag("script",%r{swfobject.embedSWF})
-    html.should have_tag("script",
-      %r{http://www.kaltura.com/kwidget/wid/_#{KalturaFu.config[:partner_id]}})
-    if KalturaFu.config[:player_conf_id]
-      html.should have_tag("script",
-        %r{/ui_conf_id/#{KalturaFu.config[:player_conf_id]}})
-    else 
-      html.should have_tag("script",
-	%r{/ui_conf_id/#{KalturaFu::ViewHelpers::DEFAULT_KPLAYER}})
-    end
-    html.should have_tag("script",%r{"kplayer","400","330"})
-  end
-  it "should embed a player with a different div" do
-    html = helper.kaltura_player_embed(12345,:div_id=>"waffles")
-
-    #check the outer div
-    html.should have_tag("div#waffles")
-
-    # check the parameters
-    html.should have_tag("script",%r{allowscriptaccess: "always"})
-    html.should have_tag("script",%r{allownetworking: "all"})
-    html.should have_tag("script",%r{allowfullscreen: "true"})
-    html.should have_tag("script",%r{wmode: "opaque"})
-
-    # check the vars
-    html.should have_tag("script",%r{entryId: "12345"})  
-
-    # check the embed
-    html.should have_tag("script",%r{swfobject.embedSWF})
-    html.should have_tag("script",
-      %r{http://www.kaltura.com/kwidget/wid/_#{KalturaFu.config[:partner_id]}})
-    if KalturaFu.config[:player_conf_id]
-      html.should have_tag("script",
-        %r{/ui_conf_id/#{KalturaFu.config[:player_conf_id]}})
-    else
-      html.should have_tag("script",
-	%r{/ui_conf_id/#{KalturaFu::ViewHelpers::DEFAULT_KPLAYER}})
-    end
-    html.should have_tag("script",%r{"waffles","400","330"})
-  end 
-
-  it "should embed a player with a different config id" do
-    html = helper.kaltura_player_embed(12345, :player_conf_id=>"1234")
-
-    #check the outer div
-    html.should have_tag("div#kplayer")
-
-    # check the parameters
-    html.should have_tag("script",%r{allowscriptaccess: "always"})
-    html.should have_tag("script",%r{allownetworking: "all"})
-    html.should have_tag("script",%r{allowfullscreen: "true"})
-    html.should have_tag("script",%r{wmode: "opaque"})
-
-    # check the vars
-    html.should have_tag("script",%r{entryId: "12345"})  
-
-    # check the embed
-    html.should have_tag("script",%r{swfobject.embedSWF})
-    html.should have_tag("script",
-      %r{http://www.kaltura.com/kwidget/wid/_#{KalturaFu.config[:partner_id]}})
-    html.should have_tag("script",
-      %r{/ui_conf_id/1234})
-    html.should have_tag("script",%r{"kplayer","400","330"})
-  end 
-
-  it "should allow a resize on the player" do
-    html = helper.kaltura_player_embed(12345,:size=>[200,170])
-
-    #check the outer div
-    html.should have_tag("div#kplayer")
-
-    # check the parameters
-    html.should have_tag("script",%r{allowscriptaccess: "always"})
-    html.should have_tag("script",%r{allownetworking: "all"})
-    html.should have_tag("script",%r{allowfullscreen: "true"})
-    html.should have_tag("script",%r{wmode: "opaque"})
-
-    # check the vars
-    html.should have_tag("script",%r{entryId: "12345"})  
-
-    # check the embed
-    html.should have_tag("script",%r{swfobject.embedSWF})
-    html.should have_tag("script",
-      %r{http://www.kaltura.com/kwidget/wid/_#{KalturaFu.config[:partner_id]}})
-    if KalturaFu.config[:player_conf_id]
-      html.should have_tag("script",
-        %r{/ui_conf_id/#{KalturaFu.config[:player_conf_id]}})
-    else 
-      html.should have_tag("script",
-	%r{/ui_conf_id/#{KalturaFu::ViewHelpers::DEFAULT_KPLAYER}})
-    end
-    html.should have_tag("script",%r{"kplayer","200","170"})
+describe "General Configuration testing" do
+  it "Should start with an empty config" do
+    KalturaFu.config.should be_empty
   end
   
-  it "should seek to a time in seconds when asked" do
-    html = helper.kaltura_seek_link("Seek to 5 seconds","5")
-    html.should have_tag("a[href=\"#\"]", "Seek to 5 seconds")
-    html.should have_tag("a[onclick=\"$(kplayer).get(0).sendNotification(\'doSeek\',5);window.scrollTo(0,0);return false;\"]")
-    html.should_not have_tag("a[div_id=\"kplayer\"]")
+  it "Shouldn't generate a Kaltura session on an empty config" do
+    lambda {KalturaFu.generate_session_key}.should raise_error(RuntimeError, "Missing Partner Identifier")
   end
-
+  
+  it "Shouldn't generate a Kaltura session without an administrator secret" do
+    KalturaFu.config[:partner_id] = '121413'
+    lambda {KalturaFu.generate_session_key}.should raise_error(RuntimeError, "Missing Administrator Secret")
+  end
+  
+  it "Should respect the Service URL when constructing a Client configuration" do
+    KalturaFu.config[:parnter_id] = '123434'
+    lambda {KalturaFu.create_client_config}.should_not raise_error
+    
+    KalturaFu.client_configuration.service_url.should == "http://www.kaltura.com"
+    
+    service_url = "http://www.waffletastic.com"
+    KalturaFu.config[:service_url] = service_url
+    KalturaFu.create_client_config
+    KalturaFu.client_configuration.service_url.should == service_url
+  end
+  
+  it "Should raise a Kaltura::APIError when you provide incorrect information." do
+    KalturaFu.config = {}
+    KalturaFu.config[:partner_id] , KalturaFu.config[:administrator_secret] = '1241' , 'a3$35casd'
+    lambda {KalturaFu.generate_session_key}.should raise_error(Kaltura::APIError)
+  end
+end
+describe "Valid Configuration tests" do
+  before :each do 
+    KalturaFuTestConfiguration.setup
+  end
+  
+  it "Should function just fine with proper credentials" do
+    lambda {KalturaFu.generate_session_key}.should_not raise_error
+  end
+  
+  it "Should allow you to clear the session" do
+    KalturaFu.generate_session_key
+    KalturaFu.clear_session_key!
+    
+    KalturaFu.session_key.should be nil
+  end
+  
+  it "Should generate a valid session if you ask politely" do
+    KalturaFu.clear_session_key!
+    KalturaFu.check_for_client_session
+    
+    KalturaFu.session_key.should_not be nil
+  end
 end

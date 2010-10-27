@@ -1,25 +1,4 @@
 ##
-# @private
-##
-class Hash
-  
-  ##
-  # @private
-  ##
-  def recursively_symbolize_keys
-    tmp = {}
-    for k, v in self
-      tmp[k] = if v.respond_to? :recursively_symbolize_keys
-                 v.recursively_symbolize_keys
-               else
-                 v
-               end
-    end
-    tmp.symbolize_keys
-  end
-end
-
-##
 # The KalturaFu module provides a singleton implementation for Kaltura API interaction.  It stores session and API client information so that they do not need to be reset.
 # @author Patrick Robertson
 #
@@ -30,85 +9,23 @@ end
 # @example Clear a session:
 #   KalturaFu.clear_session_key! #=> nil
 ##
+require 'rubygems'
+require 'kaltura'
+
 module KalturaFu
   
+  #Initilize the configuration and send the ViewHelpers into ActionView::Base when it's a Rails 3 app.
   require 'kaltura_fu/railtie' if defined?(Rails) && Rails.version.split(".").first == "3"
+  
   autoload :Video, 'kaltura_fu/video'
   autoload :Category, 'kaltura_fu/category'
   autoload :Report, 'kaltura_fu/report'
+  autoload :Configuration, 'kaltura_fu/configuration'
+  autoload :Entry, 'kaltura_fu/entry'
   
-  # Kaltura's ready state.
-  READY = Kaltura::Constants::FlavorAssetStatus::READY
-  
-  
-  @@config = {}
-  @@client = nil
-  @@client_configuration = nil
-  @@session_key = nil
-  mattr_reader :config
-  mattr_reader :client
-  mattr_reader :session_key
-  
-  class << self
-    ##
-    # @private
-    ##
-    def config=(options)
-      @@config = options
-    end
-    
-    ##
-    # @private
-    #
-    def create_client_config
-      @@client_configuration = Kaltura::Configuration.new(@@config[:partner_id])
-      unless @@config[:service_url].blank?
-        @@client_configuration.service_url = @@config[:service_url]
-      end
-      @@client_configuration
-    end
-    
-    ##
-    # @private
-    ##
-    def create_client
-      if @@client_configuration.nil?
-        self.create_client_config
-      end
-      @@client = Kaltura::Client.new(@@client_configuration)
-      @@client
-    end
-    
-    ##
-    # Generates a Kaltura ks and adds it to the KalturaFu client object.
-    #
-    # @return [String] a Kaltura KS.
-    ## 
-    def generate_session_key
-      self.check_for_client_session
-      
-      @@session_key = @@client.session_service.start(@@config[:administrator_secret],'',Kaltura::Constants::SessionType::ADMIN)
-      @@client.ks = @@session_key
-    end
-    ##
-    # Clears the current Kaltura ks.
-    ##
-    def clear_session_key!
-      @@session_key = nil
-    end
-    
-    ##
-    # @private
-    ##
-    def check_for_client_session
-      if @@client.nil?
-        self.create_client
-        self.generate_session_key
-        true
-      else
-        true
-      end
-    end
-          
+  module Entry
+    autoload :Metadata, 'kaltura_fu/entry/metadata'
   end
+  
+  extend Configuration
 end
