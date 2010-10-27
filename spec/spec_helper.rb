@@ -21,4 +21,8 @@ class KalturaFuTestConfiguration
     KalturaFu.client = nil
     KalturaFu.client_configuration = nil
   end
+  
+  def self.video
+    File.open(File.join(File.dirname(__FILE__),'config','video.flv'))
+  end
 end

@@ -1,6 +1,12 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
 describe "General Configuration testing" do
+  before(:all) do
+    KalturaFu.config = {}
+    KalturaFu.client_configuration =nil
+    KalturaFu.clear_session_key!
+    KalturaFu.client = nil
+  end
   it "Should start with an empty config" do
     KalturaFu.config.should be_empty
   end
