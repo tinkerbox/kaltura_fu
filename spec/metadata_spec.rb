@@ -1,20 +1,212 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
-include KalturaFu::Entry::Metadata
+class MetadataSpecTester 
+  include KalturaFu::Entry::Metadata
+end
+
+class EntryUploader
+  include KalturaFu::Entry
+end
 
 describe "Actions on an entries metadata" do
   before(:all) do
     KalturaFuTestConfiguration.setup
   end
   
+  before(:each) do 
+    @entry_id = EntryUploader.upload(KalturaFuTestConfiguration.video,:source=>:file)
+  end
+  
+  after(:each) do
+    EntryUploader.new.delete_entry(@entry_id)
+  end
+  
   it "should respond to getting, setting, and adding valid entry attributes" do
-    self.should respond_to :get_name
-    self.should respond_to :set_description
-    self.should respond_to :add_categories
+    test = MetadataSpecTester.new
+    test.should respond_to :get_name
+    test.should respond_to :set_description
+    test.should respond_to :add_category
   end
   it "should not respond to getting, setting, and adding invalid entry attributes" do
-    self.should_not respond_to :add_waffles
-    self.should_not respond_to :set_magic
-    self.should_not respond_to :get_barack_obama
+    test = MetadataSpecTester.new
+    test.should_not respond_to :add_waffles
+    test.should_not respond_to :set_magic
+    test.should_not respond_to :get_barack_obama
+  end
+  
+  it "should set the name field when asked kindly" do
+    test = MetadataSpecTester.new    
+    test.set_name(@entry_id,"waffles").should == "waffles"
+  end
+  
+  it "should set the desription field when asked kindly" do
+    test = MetadataSpecTester.new    
+    test.set_description(@entry_id,"The beginning of the end of the beginning").should == "The beginning of the end of the beginning"
+  end
+  
+  it "should be a little weirder when setting a group of tags" do
+    test = MetadataSpecTester.new
+    test.set_tags(@entry_id,"waffles,awesome,rock,hard").should == "waffles, awesome, rock, hard"
+    test.get_tags(@entry_id).should == "waffles, awesome, rock, hard"
+  end
+  
+  it "should just be weird with tags, admin tags don't act this way either" do
+    test = MetadataSpecTester.new
+    test.set_admin_tags(@entry_id,"waffles,awesome,rock,hard").should == "waffles,awesome,rock,hard"
+    test.get_admin_tags(@entry_id).should == "waffles,awesome,rock,hard"
+  end  
+  
+  it "shouldn't act like tags with categories" do
+    test = MetadataSpecTester.new
+    test.set_categories(@entry_id,"waffles,awesome,rock,hard").should == "waffles,awesome,rock,hard"
+  end
+  
+  it "should raise a Kaltura::APIError when you give it a bogus entry" do
+    test = MetadataSpecTester.new
+    
+    lambda {test.set_name("waffles","waffles")}.should raise_error(Kaltura::APIError)
+  end
+  
+  it "should not increment the version when you perform set actions" do
+    test = MetadataSpecTester.new
+    
+    version_count = test.get_version(@entry_id).to_i
+    
+    test.set_name(@entry_id,"my new name")
+    test.get_version(@entry_id).to_i.should == version_count
+  end
+  
+  it "should not increment the version when you perform set actions on tags" do
+    test = MetadataSpecTester.new
+    
+    version_count = test.get_version(@entry_id).to_i
+    
+    test.set_tags(@entry_id,"buttons,kittens,pirates")
+    test.get_version(@entry_id).to_i.should == version_count
+  end
+  
+  it "should be making KMC categories for every category you set unless it already exists." do
+    test = MetadataSpecTester.new
+    
+    categories = "waffles#{rand(10)},pirates#{rand(18)},peanuts#{rand(44)}"
+    categories.split(",").each do |category|
+      test.category_exists?(category).should be_false
+    end
+    
+    test.set_categories(@entry_id,categories)
+    
+    categories.split(",").each do |category|
+      cat = test.category_exists?(category)
+      cat.should_not be_false
+    end
+    
+    bob = KalturaFu.client.category_service.list.objects
+    bob.each do |cat|
+      if cat.name =~/^(waffles|pirates|peanuts)(.*)/
+        KalturaFu.client.category_service.delete(cat.id)
+      end
+    end
+      
+  end
+  
+  it "should only let you add a category or a tag, or something_category or something_tag" do
+    test = MetadataSpecTester.new
+    
+    test.should respond_to :add_tag
+    test.should respond_to :add_admin_tag
+    test.should respond_to :add_category
+    test.should respond_to :add_categories
+    test.should respond_to :add_tags
+    test.should respond_to :add_admin_tags
+    
+    test.should_not respond_to :add_name
+  end
+  
+  it "should allow you to add tags onto an existing tag string without knowing the original tags" do
+    test = MetadataSpecTester.new
+    
+    original_tags = test.set_tags(@entry_id,"gorillaz, pop, damon, albarn")
+    
+    test.add_tags(@entry_id,"mos,def").should == original_tags + ", mos, def"
+  end
+  
+  it "should let you add a single tag too, syntax sugar is rad." do
+    test = MetadataSpecTester.new
+    
+    original_tags = test.set_tags(@entry_id,"gorillaz, pop, damon, albarn")
+    
+    test.add_tag(@entry_id,"mos").should == original_tags + ", mos"    
+  end
+  
+  it "should allow you to add admin tags onto an existing tag string without knowing the original tags" do
+    test = MetadataSpecTester.new
+    
+    original_tags = test.set_admin_tags(@entry_id,"gorillaz,pop,damon,albarn")
+    
+    test.add_admin_tags(@entry_id,"mos,def").should == original_tags + ",mos,def"
+  end
+  
+  it "should let you add a single admin tag too, syntax sugar is rad." do
+    test = MetadataSpecTester.new
+    
+    original_tags = test.set_admin_tags(@entry_id,"gorillaz, pop, damon, albarn")
+    
+    test.add_admin_tag(@entry_id,"mos").should == original_tags + ",mos"    
+  end
+  
+  it "should let you add categories onto an existing category string as well." do
+    test = MetadataSpecTester.new
+    
+    original_categories = test.set_categories(@entry_id,"peanuts#{rand(10)}")
+    
+    new_cats = "pirates#{rand(10)},waffles#{rand(10)}"
+    test.add_categories(@entry_id,new_cats).should == original_categories + ",#{new_cats}"
+    check_string = original_categories + ",#{new_cats}"
+    check_string.split(",").each do |category|
+      cat = test.category_exists?(category)
+      cat.should_not be_false
+    end
+    bob = KalturaFu.client.category_service.list.objects
+    bob.each do |cat|
+      if cat.name =~/^(waffles|pirates|peanuts)(.*)/
+        KalturaFu.client.category_service.delete(cat.id)
+      end
+    end
+  end
+  
+  it "should create categories for each one you add if they don't exist." do
+    test = MetadataSpecTester.new
+    
+    original_categories = test.set_categories(@entry_id,"peanuts#{rand(10)}")
+    
+    new_cats = "pirates#{rand(10)},waffles#{rand(10)}"
+    test.add_categories(@entry_id,new_cats)
+    check_string = original_categories + ",#{new_cats}"
+    check_string.split(",").each do |category|
+      cat = test.category_exists?(category)
+      cat.should_not be_false
+    end
+    bob = KalturaFu.client.category_service.list.objects
+    bob.each do |cat|
+      if cat.name =~/^(waffles|pirates|peanuts)(.*)/
+        KalturaFu.client.category_service.delete(cat.id)
+      end
+    end
+  end
+  
+  it "should let you add categories onto an existing category string as well." do
+    test = MetadataSpecTester.new
+    
+    original_categories = test.set_categories(@entry_id,"peanuts#{rand(10)},pirates#{rand(10)}")
+    
+    new_cat = "waffles#{rand(10)}"
+    test.add_category(@entry_id,new_cat).should == original_categories + ",#{new_cat}"
+    
+    bob = KalturaFu.client.category_service.list.objects
+    bob.each do |cat|
+      if cat.name =~/^(waffles|pirates|peanuts)(.*)/
+        KalturaFu.client.category_service.delete(cat.id)
+      end
+    end
   end
 end

@@ -20,7 +20,9 @@ module KalturaFu
       end      
     end
     
+    ##
     # @private
+    ##
     def self.included(base)
       base.extend ClassMethods
       base.class_eval do 
@@ -33,6 +35,7 @@ module KalturaFu
     # Class level methods for the Entry module.  
     ##
     module ClassMethods
+      #extend KalturaFu::Entry::Metadata
       ##
       # Allows you to upload some variety of media into Kaltura.  
       # This isn't going to be as great to use as one of their flash widgets, and 
@@ -63,13 +66,17 @@ module KalturaFu
         #pending
       end
       
+      ##
       # @private
+      ##
       def upload_from_file(upload_object,media_entry)
         upload_token = KalturaFu.client.media_service.upload(upload_object)
         KalturaFu.client.media_service.add_from_uploaded_file(media_entry,upload_token).id
       end
       
+      ##
       # @private
+      ##
       def construct_entry_from_options(options={})
         media_entry = Kaltura::MediaEntry.new
         options.each do |key,value|
