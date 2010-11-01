@@ -8,9 +8,9 @@ module KalturaFu
       # @private
       ##
       def self.included(base)
-        base.extend ClassMethods
+        base.extend ClassAndInstanceMethods
         base.class_eval do
-          include ClassMethods
+          include ClassAndInstanceMethods
         end
         super
       end
@@ -84,6 +84,9 @@ module KalturaFu
         
       end
       
+      ##
+      # @private
+      ##
       def add_categories_to_kaltura(categories)
         KalturaFu.check_for_client_session
         
@@ -112,6 +115,21 @@ module KalturaFu
         end
       end
       
+      
+      ##
+      # Appends a specific Kaltura::MediaEntry attribute to the end of the original attribute given a Kaltura entry.
+      # This method is called by method_missing, allowing this module add attributes based
+      # off of the current API wrapper, rather than having to update along side the API wrapper.
+      #
+      # @param [String] attr_name The attribute to set.
+      # @param [String] entry_id The Kaltura entry ID.
+      # @param [String] value The value you wish to append the attribute with.
+      # 
+      # @return [String] Returns the value as stored in the Kaltura database.  Tag strings come back
+      #   slightly funny.
+      #
+      # @raise [Kaltura::APIError] Passes Kaltura API errors directly through.
+      ##      
       def add_attribute(attr_name,entry_id,value)
         KalturaFu.check_for_client_session
 
@@ -124,29 +142,6 @@ module KalturaFu
         KalturaFu.client.media_service.update(entry_id,media_entry).send(attr_name.to_sym)
       end
       
-      module ClassMethods
-        def valid_entry_attribute?(request_attribute)
-          object_methods, media_entry_methods = Object.instance_methods , Kaltura::MediaEntry.instance_methods
-
-          #clean out all the setter methods from the media entry methods
-          valid_media_entry_methods = media_entry_methods.map{|m| m unless m =~/^(.*)=/}.compact!
-
-          valid_media_entry_methods -= object_methods
-          valid_media_entry_methods.find{|m| m.to_sym == request_attribute.to_sym} ? true : false
-        end
-         
-        def valid_add_attribute?(request_attribute)
-          case request_attribute.to_s
-            when /^(.*)_(categor(y|ies)|(tag|tags))/ 
-              return true
-            when /^(categor(y|ies)|tag)/
-              return true
-          else
-            return false
-          end 
-        end
-        
-      end
     end
   end
 end

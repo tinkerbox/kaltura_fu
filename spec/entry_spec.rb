@@ -19,7 +19,8 @@ describe "Kaltura Fu's Entry Class Methods" do
     lambda {entry_id = EntrySpecTester.upload(KalturaFuTestConfiguration.video, :source=>:file)}.should_not raise_error
     
     lambda {@tester.get_entry(entry_id)}.should_not raise_error
-    lambda {@tester.delete_entry(entry_id)}.should be_true
+    check = @tester.delete_entry(entry_id)
+    check.should be_true
   end
   
   it "Does nothing when you don't source the method as a file upload" do
@@ -44,7 +45,8 @@ describe "Kaltura Fu's Entry Class Methods" do
     media_entry.description.should == video_options[:description]
     media_entry.tags.should == video_options[:tags]
     
-    lambda {@tester.delete_entry(entry_id)}.should be_true
+    check = @tester.delete_entry(entry_id)
+    check.should be_true
   end
   
   it "Is totally cool with you supplying jibberish in the options too." do
@@ -65,6 +67,7 @@ describe "Kaltura Fu's Entry Class Methods" do
     media_entry.tags.should == video_options[:tags]
     media_entry.should_not respond_to :waffles
     
-    lambda {@tester.delete_entry(entry_id)}.should be_true    
+    check = @tester.delete_entry(entry_id)
+    check.should be_true    
   end
 end

@@ -1,2 +1,4 @@
 *.swp
 doc/**
+.svn
+.DS_Store

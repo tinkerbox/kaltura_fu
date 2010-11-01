@@ -25,6 +25,12 @@ module KalturaFu
   
   module Entry
     autoload :Metadata, 'kaltura_fu/entry/metadata'
+    autoload :ClassMethods, 'kaltura_fu/entry/class_methods'
+    autoload :InstanceMethods, 'kaltura_fu/entry/instance_methods'
+    
+    module Metadata
+      autoload :ClassAndInstanceMethods, 'kaltura_fu/entry/metadata/class_and_instance_methods'
+    end
   end
   
   extend Configuration

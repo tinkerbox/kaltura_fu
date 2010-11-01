@@ -21,17 +21,89 @@ describe "Actions on an entries metadata" do
     EntryUploader.new.delete_entry(@entry_id)
   end
   
-  it "should respond to getting, setting, and adding valid entry attributes" do
+  it "should respond to getting valid entry attributes" do
     test = MetadataSpecTester.new
     test.should respond_to :get_name
+  end
+  
+  it "should respond to getting valid entry attributes" do
+    test = MetadataSpecTester.new
+    test.should respond_to :get_description
+  end
+  
+  it "should respond to getting valid entry attributes" do
+    test = MetadataSpecTester.new
+    test.should respond_to :get_categories
+  end
+  
+  it "should respond to setting valid entry attributes" do
+    test = MetadataSpecTester.new
     test.should respond_to :set_description
+  end
+  
+  it "should respond to setting valid entry attributes" do
+    test = MetadataSpecTester.new
+    test.should respond_to :set_name
+  end
+  
+  it "should respond to setting valid entry attributes" do
+    test = MetadataSpecTester.new
+    test.should respond_to :set_categories
+  end
+  
+  it "should respond to adding valid entry attributes" do
+    test = MetadataSpecTester.new
     test.should respond_to :add_category
   end
-  it "should not respond to getting, setting, and adding invalid entry attributes" do
+  
+  it "should respond to adding valid entry attributes" do
+    test = MetadataSpecTester.new
+    test.should respond_to :add_categories
+  end
+  
+  it "should respond to adding valid entry attributes" do
+    test = MetadataSpecTester.new
+    test.should respond_to :add_tag
+  end
+  
+  it "should respond to adding valid entry attributes" do
+    test = MetadataSpecTester.new
+    test.should respond_to :add_tags
+  end
+  
+  it "should respond to adding valid entry attributes" do
+    test = MetadataSpecTester.new
+    test.should respond_to :add_admin_tag
+  end
+  
+  it "should respond to adding valid entry attributes" do
+    test = MetadataSpecTester.new
+    test.should respond_to :add_admin_tags
+  end
+  
+  it "should not respond to getting invalid entry attributes" do
+    test = MetadataSpecTester.new
+    test.should_not respond_to :get_barack_obama
+  end
+  
+  it "should not respond to setting invalid entry attributes" do
+    test = MetadataSpecTester.new
+    test.should_not respond_to :set_magic
+  end
+  
+  it "should not respond to adding invalid entry attributes" do
     test = MetadataSpecTester.new
     test.should_not respond_to :add_waffles
-    test.should_not respond_to :set_magic
-    test.should_not respond_to :get_barack_obama
+  end  
+  
+  it "should not respond to adding valid entry attributes, but improperly typed" do
+    test = MetadataSpecTester.new
+    test.should_not respond_to :add_name
+  end
+  
+  it "should not respond to adding valid entry attributes, but improperly typed" do
+    test = MetadataSpecTester.new
+    test.should_not respond_to :add_names
   end
   
   it "should set the name field when asked kindly" do
@@ -107,19 +179,6 @@ describe "Actions on an entries metadata" do
       end
     end
       
-  end
-  
-  it "should only let you add a category or a tag, or something_category or something_tag" do
-    test = MetadataSpecTester.new
-    
-    test.should respond_to :add_tag
-    test.should respond_to :add_admin_tag
-    test.should respond_to :add_category
-    test.should respond_to :add_categories
-    test.should respond_to :add_tags
-    test.should respond_to :add_admin_tags
-    
-    test.should_not respond_to :add_name
   end
   
   it "should allow you to add tags onto an existing tag string without knowing the original tags" do
