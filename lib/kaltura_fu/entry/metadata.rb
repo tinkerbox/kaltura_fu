@@ -9,6 +9,7 @@ module KalturaFu
       ##
       def self.included(base)
         base.extend ClassAndInstanceMethods
+        base.extend ClassMethods
         base.class_eval do
           include ClassAndInstanceMethods
         end
@@ -19,13 +20,14 @@ module KalturaFu
       # @private
       ##      
       def method_missing(name, *args)
-        case name.to_s
-          when /^set_(.*)/
-            valid_entry_attribute?($1.to_sym) ? set_attribute($1,*args) : super
-          when /^add_(.*)/
-            valid_entry_attribute?($1.pluralize.to_sym) ? add_attribute($1.pluralize,*args) : super
-          when /^get_(.*)/
-            valid_entry_attribute?($1.to_sym) ? get_entry(*args).send($1.to_sym) : super
+        method_name = name.to_s  
+        unless self.class.generated_methods?
+          self.class.define_attribute_methods
+          if self.class.generated_methods.include?(method_name)
+            return self.send(name,*args)
+          else
+            super
+          end
         else
           super
         end

@@ -29,6 +29,7 @@ module KalturaFu
     autoload :InstanceMethods, 'kaltura_fu/entry/instance_methods'
     
     module Metadata
+      autoload :ClassMethods, 'kaltura_fu/entry/metadata/class_methods'
       autoload :ClassAndInstanceMethods, 'kaltura_fu/entry/metadata/class_and_instance_methods'
     end
   end

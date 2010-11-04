@@ -50,12 +50,7 @@ describe "Actions on an entries metadata" do
     test = MetadataSpecTester.new
     test.should respond_to :set_categories
   end
-  
-  it "should respond to adding valid entry attributes" do
-    test = MetadataSpecTester.new
-    test.should respond_to :add_category
-  end
-  
+    
   it "should respond to adding valid entry attributes" do
     test = MetadataSpecTester.new
     test.should respond_to :add_categories
@@ -63,19 +58,9 @@ describe "Actions on an entries metadata" do
   
   it "should respond to adding valid entry attributes" do
     test = MetadataSpecTester.new
-    test.should respond_to :add_tag
-  end
-  
-  it "should respond to adding valid entry attributes" do
-    test = MetadataSpecTester.new
     test.should respond_to :add_tags
   end
-  
-  it "should respond to adding valid entry attributes" do
-    test = MetadataSpecTester.new
-    test.should respond_to :add_admin_tag
-  end
-  
+    
   it "should respond to adding valid entry attributes" do
     test = MetadataSpecTester.new
     test.should respond_to :add_admin_tags
@@ -94,6 +79,21 @@ describe "Actions on an entries metadata" do
   it "should not respond to adding invalid entry attributes" do
     test = MetadataSpecTester.new
     test.should_not respond_to :add_waffles
+  end  
+  
+  it "should not respond to adding invalid entry attributes" do
+    test = MetadataSpecTester.new
+    test.should_not respond_to :add_category
+  end
+  
+  it "should not respond to adding invalid entry attributes" do
+    test = MetadataSpecTester.new
+    test.should_not respond_to :add_tag
+  end  
+  
+  it "should not respond to adding invalid entry attributes" do
+    test = MetadataSpecTester.new
+    test.should_not respond_to :add_admin_tag
   end  
   
   it "should not respond to adding valid entry attributes, but improperly typed" do
@@ -189,12 +189,12 @@ describe "Actions on an entries metadata" do
     test.add_tags(@entry_id,"mos,def").should == original_tags + ", mos, def"
   end
   
-  it "should let you add a single tag too, syntax sugar is rad." do
+  it "no longer responds to adding a single tag.  dynamic dispatches are cooler than syntax sugar." do
     test = MetadataSpecTester.new
     
     original_tags = test.set_tags(@entry_id,"gorillaz, pop, damon, albarn")
     
-    test.add_tag(@entry_id,"mos").should == original_tags + ", mos"    
+    lambda {test.add_tag(@entry_id,"mos")}.should raise_error  
   end
   
   it "should allow you to add admin tags onto an existing tag string without knowing the original tags" do
@@ -205,12 +205,12 @@ describe "Actions on an entries metadata" do
     test.add_admin_tags(@entry_id,"mos,def").should == original_tags + ",mos,def"
   end
   
-  it "should let you add a single admin tag too, syntax sugar is rad." do
+  it "no longer responds to adding a single admin tag" do
     test = MetadataSpecTester.new
     
     original_tags = test.set_admin_tags(@entry_id,"gorillaz, pop, damon, albarn")
     
-    test.add_admin_tag(@entry_id,"mos").should == original_tags + ",mos"    
+    lambda {test.add_admin_tag(@entry_id,"mos")}.should raise_error
   end
   
   it "should let you add categories onto an existing category string as well." do
@@ -253,13 +253,13 @@ describe "Actions on an entries metadata" do
     end
   end
   
-  it "should let you add categories onto an existing category string as well." do
+  it "should no longer respond to adding a single category" do
     test = MetadataSpecTester.new
     
     original_categories = test.set_categories(@entry_id,"peanuts#{rand(10)},pirates#{rand(10)}")
     
     new_cat = "waffles#{rand(10)}"
-    test.add_category(@entry_id,new_cat).should == original_categories + ",#{new_cat}"
+    lambda{test.add_category(@entry_id,new_cat)}.should raise_error
     
     bob = KalturaFu.client.category_service.list.objects
     bob.each do |cat|
