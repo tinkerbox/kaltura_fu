@@ -6,7 +6,7 @@ require 'spec/autorun'
 require 'rubygems'
 require 'kaltura'
 require 'yaml'
-require 'active_support'
+require 'active_support/core_ext/hash'
 
 Spec::Runner.configure do |config|
   
