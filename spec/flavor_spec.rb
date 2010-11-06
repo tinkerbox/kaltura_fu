@@ -25,4 +25,36 @@ describe "Actions specific to an entries flavors" do
     flavor = FlavorSpecTester.new
     flavor.check_status(@entry_id).should_not == Kaltura::Constants::FlavorAssetStatus::READY
   end
+  
+  it "should respond to original_flavor" do
+    flavor = FlavorSpecTester.new
+    
+    flavor.should respond_to :original_flavor
+  end
+  
+  it "should be able to get the original flavor ID without an error" do
+    flavor = FlavorSpecTester.new
+    
+    lambda{flavor.original_flavor(@entry_id)}.should_not raise_error
+  end
+  
+  it "should respond to original_file_extension" do
+    flavor = FlavorSpecTester.new
+    
+    flavor.should respond_to :original_file_extension
+  end
+  
+  it "should be able to get the original file extension without error" do
+    flavor = FlavorSpecTester.new
+    
+    lambda{flavor.original_file_extension(@entry_id)}.should_not raise_error
+  end
+  
+  it "should have a file extension of FLV for the test video" do
+    flavor = FlavorSpecTester.new
+    
+    extension = nil
+    extension = flavor.original_file_extension(@entry_id)
+    extension.should == "flv"
+  end
 end

@@ -5,46 +5,6 @@ module KalturaFu
   ##
   module Video
 
-    ##
-    # Returns the flavor of the original file uploaded to Kaltura.
-    #
-    # @param [String] video_id Kaltura entry_id of the video.
-    #
-    # @return [String] flavor_id
-    ##
-    def get_original_flavor(video_id)
-      KalturaFu.check_for_client_session
-    
-      video_array = KalturaFu.client.flavor_asset_service.get_by_entry_id(video_id)
-      ret_flavor = nil
-    
-      video_array.each do |video|
-        if video.is_original
-          ret_flavor = video.id.to_s
-        end
-      end
-      ret_flavor
-    end
-
-    ##
-    # Returns the file extension of the original file uploaded to Kaltura for a given entry
-    #
-    # @param [String] video_id Kaltura entry_id of the video.
-    #
-    # @return [String] file extension
-    ##
-    def get_original_file_extension(video_id)
-      KalturaFu.check_for_client_session
-  
-      video_array = KalturaFu.client.flavor_asset_service.get_by_entry_id(video_id)
-      source_extension = nil
-      video_array.each do |video|
-        if video.is_original
-          source_extension = video.file_ext
-        end
-      end
-      source_extension
-    end
 
     ##
     # Returns the URL of the requested video. 
