@@ -23,29 +23,6 @@ module KalturaFu
       thumbnail_string += "/vid_sec/#{time}" unless time.nil?
       return thumbnail_string
     end
-
-
-    ##
-    # Returns a download URL suitable to be used for iTunes one-click syndication.  serveFlavor is not documented in KalturaAPI v3
-    # nor is the ?novar=0 paramter.  
-    # 
-    # @param [String] video_id Kaltura entry_id of the video
-    #
-    # @return [String] URL that works with RSS/iTunes syndication.  Normal flavor serving is flakey with syndication.
-    ##
-    def set_syndication_url(video_id)
-      KalturaFu.check_for_client_session
-    
-      video_array = KalturaFu.client.flavor_asset_service.get_by_entry_id(video_id)
-    
-      download_url = nil
-      video_array.each do |video|
-        if video.is_original
-          download_url = 'http://www.kaltura.com/p/203822/sp/20382200/serveFlavor/flavorId/' + video.id.to_s + '/name/' + video.id.to_s + '.' + video.file_ext.to_s + '?novar=0'
-        end
-      end
-      download_url
-    end
     
   end
 end

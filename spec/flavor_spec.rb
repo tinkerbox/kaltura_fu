@@ -57,4 +57,35 @@ describe "Actions specific to an entries flavors" do
     extension = flavor.original_file_extension(@entry_id)
     extension.should == "flv"
   end
+  
+  it "should respond to original_download_url" do
+    flavor = FlavorSpecTester.new
+    
+    flavor.should respond_to :original_download_url
+  end
+  
+  it "shouldn't blow up when I call original_download_url" do
+    flavor = FlavorSpecTester.new
+    
+    lambda {flavor.original_download_url(@entry_id)}.should_not raise_error
+  end
+  
+  it "original_download_url should look like a reasonable URL" do
+    flavor = FlavorSpecTester.new
+    
+    url = flavor.original_download_url(@entry_id)
+    test_url = "#{KalturaFu.config[:service_url]}/p/#{KalturaFu.config[:partner_id]}/sp/#{KalturaFu.config[:subpartner_id]}/serveFlavor/flavorId/#{flavor.original_flavor(@entry_id)}/name/#{flavor.original_flavor(@entry_id)}.#{flavor.original_file_extension(@entry_id)}?novar=0"
+    url.should == test_url
+  end
+  
+  it "should respond to changes in service_url" do
+    flavor = FlavorSpecTester.new
+    old_service_url = KalturaFu.config[:service_url]
+    KalturaFu.config[:service_url] = "http://www.waffles.com"
+    
+    url = flavor.original_download_url(@entry_id)
+    test_url = "http://www.waffles.com/p/#{KalturaFu.config[:partner_id]}/sp/#{KalturaFu.config[:subpartner_id]}/serveFlavor/flavorId/#{flavor.original_flavor(@entry_id)}/name/#{flavor.original_flavor(@entry_id)}.#{flavor.original_file_extension(@entry_id)}?novar=0"
+    KalturaFu.config[:service_url] = old_service_url
+    url.should == test_url
+  end
 end

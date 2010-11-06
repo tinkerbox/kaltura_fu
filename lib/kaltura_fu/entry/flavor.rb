@@ -84,6 +84,26 @@ module KalturaFu
         end
         source_extension
       end
+
+      ##
+      # Returns a download URL suitable to be used for iTunes one-click syndication.  serveFlavor is not documented in KalturaAPI v3
+      # nor is the ?novar=0 paramter.  
+      # 
+      # @param [String] video_id Kaltura entry_id of the video
+      #
+      # @return [String] URL that works with RSS/iTunes syndication.  Normal flavor serving is flakey with syndication.
+      ##
+      def original_download_url(video_id)
+        KalturaFu.check_for_client_session
+        
+        service_url = KalturaFu.config[:service_url] || "http://www.kaltura.com"
+        partner_id = KalturaFu.config[:partner_id]
+        subpartner_id = (partner_id.to_i * 100).to_s
+        flavor = original_flavor(video_id)
+        extension = original_file_extension(video_id)
+        
+        "#{service_url}/p/#{partner_id}/sp/#{subpartner_id}/serveFlavor/flavorId/#{flavor}/name/#{flavor}.#{extension}?novar=0"
+      end
              
     end
   end
