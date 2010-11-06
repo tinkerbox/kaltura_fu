@@ -50,9 +50,9 @@ module KalturaFu
   
   module Entry
     
-    autoload :Metadata, 'entry/metadata'
-    autoload :ClassMethods, 'entry/class_methods'
-    autoload :InstanceMethods, 'entry/instance_methods'
+    autoload :Metadata, 'kaltura_fu/entry/metadata'
+    autoload :ClassMethods, 'kaltura_fu/entry/class_methods'
+    autoload :InstanceMethods, 'kaltura_fu/entry/instance_methods'
       
     module Metadata
       autoload :ClassMethods, 'kaltura_fu/entry/metadata/class_methods'
