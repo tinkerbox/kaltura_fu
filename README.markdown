@@ -12,18 +12,35 @@ About Kaltura
 About Kaltura_Fu
 ------------------
 
-kaltura_fu is a gem for rails that extends the basic functionality of the Kaltura ruby client and adds in some Rails view helpers to generate video players, thumbnails, and the uploader.  The Kaltura session and client are managed in a singleton pattern, and there are additional modules that allow you to more perform basic API actions in a more efficient manner.
+Kaltura_Fu is a gem that wraps the Kaltura-Ruby API wrapper and also adds some convenience methods for Rails'
+ActionView.  The intent of this library is to provide a far easier means to communicate with your Kaltura server.
+It's just too much of a pain to update simple things like the metadata fields with the default kaltura-ruby client.
 
 Installation:
 -------------
 Install the gem with the command:
     
-    gem install kaltura_fu --pre
+    gem install kaltura_fu
 Run: 
   
     script/generate kaltura_fu_install
     
 This will install the kaltura.yml file into your application's config directory and the kaltura_upload.js into the application's public/javascripts directory.
+	
+Testing:
+--------
+
+The Kaltura_Fu library is being tested against the following version of Ruby:
+
+* 1.8.7(MRI)
+* 1.8.7(EE)
+* 1.9.2(YARV)
+* Rubinius
+	
+In order to test this gem (for local development), you'll need to have access to a Kaltura server.
+I use a local installation of KalturaCE.  You'll have to add a config file under spec/config/kaltura.yml and 
+add in a small video file named video.flv in the same folder.  Since Kaltura provides no testing in kaltura-ruby,
+I tend to use this library as a test suite for fixes for that library as well.	
 	
 
 Documentation:
