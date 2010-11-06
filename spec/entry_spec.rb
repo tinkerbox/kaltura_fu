@@ -71,10 +71,4 @@ describe "Kaltura Fu's Entry Class Methods" do
     check.should be_true    
   end
   
-  it "should return a status of not-ready when a video uploads" do
-    entry_id = EntrySpecTester.upload(KalturaFuTestConfiguration.video,:source=>:file)
-    
-    @tester.check_status(entry_id).should_not == Kaltura::Constants::FlavorAssetStatus::READY
-    @tester.delete_entry(entry_id)
-  end
 end

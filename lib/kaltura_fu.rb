@@ -49,6 +49,7 @@ module KalturaFu
     autoload :Metadata, 'kaltura_fu/entry/metadata'
     autoload :ClassMethods, 'kaltura_fu/entry/class_methods'
     autoload :InstanceMethods, 'kaltura_fu/entry/instance_methods'
+    autoload :Flavor, 'kaltura_fu/entry/flavor'
       
     module Metadata
       autoload :ClassMethods, 'kaltura_fu/entry/metadata/class_methods'

@@ -80,6 +80,7 @@ module KalturaFu
       base.class_eval do 
         include Metadata
         include InstanceMethods
+        include Flavor
       end
       super
     end
