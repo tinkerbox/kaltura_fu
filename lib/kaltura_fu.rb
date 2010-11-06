@@ -38,10 +38,6 @@ module KalturaFu
   require 'kaltura_fu/railtie' if defined?(Rails) && Rails.version.split(".").first == "3"
   
   autoload :Configuration, 'kaltura_fu/configuration'
-  
-  autoload :Video, 'kaltura_fu/video'
-  autoload :Category, 'kaltura_fu/category'
-  autoload :Report, 'kaltura_fu/report'
   autoload :Entry, 'kaltura_fu/entry'
   
   module Entry
