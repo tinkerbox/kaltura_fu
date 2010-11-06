@@ -2,6 +2,13 @@ require 'active_support'
 
 module KalturaFu
   module Entry
+    
+    ##
+    # The Metadata module provides methods that get/set and add metadata to the 
+    # Kaltura installation.  
+    #
+    # @author Patrick Robertson
+    ##
     module Metadata
 
       ##

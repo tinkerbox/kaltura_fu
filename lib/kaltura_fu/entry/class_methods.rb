@@ -57,5 +57,5 @@ module KalturaFu
       end
       
     end #ClassMethods
-  end
-end
+  end #Entry
+end #KalturaFu

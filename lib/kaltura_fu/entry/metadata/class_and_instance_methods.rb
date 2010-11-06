@@ -2,6 +2,10 @@ module KalturaFu
   module Entry
     module Metadata
       
+      ##
+      # It is necessary to have the check for valid Kaltura MediaEntry methods available at both
+      # the class and instance level, so they are thrown into this module.
+      ##
       module ClassAndInstanceMethods
         
         ##

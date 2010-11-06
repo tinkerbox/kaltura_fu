@@ -1,5 +1,12 @@
 module KalturaFu
   module Entry
+    ##
+    # The flavor module mixes in instance methods for a class that includes the Entry module.  This 
+    # module primarily provides means to operate on the original upload to Kaltura.  It also contains
+    # a very important method for checking the overall status of a specific entry.  
+    #
+    # @author Patrick Robertson
+    ##
     module Flavor
       ##
       # Checks each flavor under a Kaltura entry for readiness.  It is possible under v3 of the Kaltura API
@@ -105,6 +112,6 @@ module KalturaFu
         "#{service_url}/p/#{partner_id}/sp/#{subpartner_id}/serveFlavor/flavorId/#{flavor}/name/#{flavor}.#{extension}?novar=0"
       end
              
-    end
-  end
-end
+    end #Flavor
+  end #Entry
+end #KalturaFu

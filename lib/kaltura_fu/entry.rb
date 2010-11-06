@@ -59,7 +59,7 @@ module KalturaFu
   #   set_name("1_q34aa52a", "waffles")
   #   set_categories("1_q34aa52a", "HD,h.264,live recording")
   #
-  # @example appending tags to an existing set:
+  # @example Appending tags to an existing set:
   #   add_tags("1_q34aa52a","eductation, lecture capture")
   # 
   # == Checking the Status of an Entry
@@ -67,6 +67,24 @@ module KalturaFu
   # while flavors are still encoding.  When you embed the entry on a webpage, it will render an
   # error "Media is currently converting".  The only solution is to instead check the status of 
   # each flavor instead to ensure total readiness.
+  #
+  # @example Checking an entries status:
+  #   check_status("1_q34aa52a")
+  #
+  # == Retrieving Status About the Source Video
+  # Occasionally, you need to interact with the original video in some form or another with Kaltura.
+  # One production situation I have encountered in the past is maintaining a copy of the source video
+  # on a large data store seperate from Kaltura.  It is extremely difficult to work with the download
+  # URL that Kaltura provides for that.
+  #
+  # @example Getting the Flavor ID of the original video associated with an entry:
+  #   original_flavor("1_q34aa52a")
+  #
+  # @example Getting the file extension of the original video associated with an entry:
+  #   original_file_extension("1_q34aa52a")
+  # 
+  # @example Getting a usable download URL for the entries original file:
+  #   original_download_url("1_q34aa52a")
   #
   # @author Patrick Robertson
   ##

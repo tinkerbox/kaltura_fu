@@ -1,5 +1,8 @@
 module KalturaFu
   module Entry
+    ##
+    # Instance level methods for the Entry module.
+    ##
     module InstanceMethods
       ##
       # Deletes a Kaltura entry.  Unlike the base API delete method, this returns true/false based on success.
