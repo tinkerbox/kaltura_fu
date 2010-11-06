@@ -33,11 +33,11 @@ module KalturaFu
   #
   # @example A basic file upload example:
   #   media_file = File.new("/path/to/video.mp4")
-  #   upload(media_file,:source => "file")
+  #   upload(media_file,:source => :file)
   #
   # @example A file upload with metadata fields populated:
   #   media_file = File.new("/path/to/video.mp4")
-  #   upload(media_file, :source => "file",
+  #   upload(media_file, :source => :file,
   #     :name => "My Rad video",
   #     :description => "I'm capable of such rad things.",
   #     :tags => "rad,rowdy,video,h.264",
@@ -61,6 +61,14 @@ module KalturaFu
   #
   # @example appending tags to an existing set:
   #   add_tags("1_q34aa52a","eductation, lecture capture")
+  # 
+  # == Checking the Status of an Entry
+  # One unfortunate aspect of the Kaltura API is that an entry will report it's status as "ready"
+  # while flavors are still encoding.  When you embed the entry on a webpage, it will render an
+  # error "Media is currently converting".  The only solution is to instead check the status of 
+  # each flavor instead to ensure total readiness.
+  #
+  # @author Patrick Robertson
   ##
   module Entry
         

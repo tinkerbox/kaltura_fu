@@ -1,10 +1,10 @@
 module KalturaFu
   module Configuration
   
-    @@config = {}
-    @@client = nil
-    @@client_configuration = nil
-    @@session_key = nil
+    @@config = {} #A Has containing the Kaltura server information
+    @@client = nil #An insantiated Kaltura::Client class 
+    @@client_configuration = nil #Configuration values for the @@client.
+    @@session_key = nil #The Kaltura ks to use.
   
     def config
       @@config ||= {}
