@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{kaltura_fu}
-  s.version = "0.1.5"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Patrick Robertson"]
-  s.date = %q{2010-11-05}
+  s.date = %q{2010-11-06}
   s.email = %q{patrick.robertson@velir.com}
   s.extra_rdoc_files = [
     "README.markdown"
@@ -29,18 +29,17 @@ Gem::Specification.new do |s|
      "lib/kaltura_fu/configuration.rb",
      "lib/kaltura_fu/entry.rb",
      "lib/kaltura_fu/entry/class_methods.rb",
+     "lib/kaltura_fu/entry/flavor.rb",
      "lib/kaltura_fu/entry/instance_methods.rb",
      "lib/kaltura_fu/entry/metadata.rb",
      "lib/kaltura_fu/entry/metadata/class_and_instance_methods.rb",
      "lib/kaltura_fu/entry/metadata/class_methods.rb",
-     "lib/kaltura_fu/flavor.rb",
      "lib/kaltura_fu/railtie.rb",
-     "lib/kaltura_fu/report.rb",
-     "lib/kaltura_fu/video.rb",
      "lib/kaltura_fu/view_helpers.rb",
      "rails/init.rb",
      "spec/debug.log",
      "spec/entry_spec.rb",
+     "spec/flavor_spec.rb",
      "spec/kaltura_fu_spec.rb",
      "spec/metadata_spec.rb",
      "spec/spec.opts",
@@ -54,6 +53,7 @@ Gem::Specification.new do |s|
   s.summary = %q{Rails gem for making Kaltura integrations easier.}
   s.test_files = [
     "spec/entry_spec.rb",
+     "spec/flavor_spec.rb",
      "spec/kaltura_fu_spec.rb",
      "spec/metadata_spec.rb",
      "spec/spec_helper.rb"
