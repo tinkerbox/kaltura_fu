@@ -94,6 +94,21 @@ module KalturaFu
       end
       
       ##
+      # Sets multiple Kaltura::MediaEntry attributes in one convienant method.
+      #
+      # @param [String] entry_id The Kaltura entry ID.
+      # @param [Hash] attributes
+      # @option attributes [String] :attribute A Kaltura::MediaEntry attribute to set
+      ##
+      def set(entry_id, attributes={})
+        KalturaFu.check_for_client_session
+        
+        attributes.each do |key,value|
+          attribute = key.to_s
+          set_attribute(attribute,entry_id,value) if valid_entry_attribute?(key)
+        end
+      end
+      ##
       # @private
       ##
       def add_categories_to_kaltura(categories)

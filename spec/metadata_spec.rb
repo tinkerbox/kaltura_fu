@@ -268,4 +268,16 @@ describe "Actions on an entries metadata" do
       end
     end
   end
+  
+  it "should let you set multiple fields at once with set()" do
+    test = MetadataSpecTester.new
+    
+    name = "Mr Peanut's wild ride"
+    description = "Man this is a random name"
+    waffles = "Man waffles isn't an attribute"
+    test.set(@entry_id,:name=>name,:description=>description,:waffles=>waffles)
+    
+    test.get_name(@entry_id).should == name
+    test.get_description(@entry_id).should == description
+  end
 end
