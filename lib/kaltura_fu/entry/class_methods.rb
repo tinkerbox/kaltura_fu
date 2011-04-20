@@ -5,13 +5,12 @@ module KalturaFu
     # Class level methods for the Entry module.  
     ##
     module ClassMethods
-      #extend KalturaFu::Entry::Metadata
       ##
       # Allows you to upload some variety of media into Kaltura.  
       # This isn't going to be as great to use as one of their flash widgets, and 
       # should likely be used "off" the web process to not slow the application down.
       #
-      # @param upload_object The object to upload.  Currently, it only works with a File.
+      # @param [File] upload_object The object to upload.  Currently, it only works with a File.
       # @param [Hash] options An options hash of Kaltura Media Entry attributes to add & the
       #   upload_object source.
       # @option options [Symbol] :source(nil) Currently only accepts :file
