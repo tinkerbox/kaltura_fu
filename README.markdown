@@ -20,7 +20,8 @@ Installation:
 -------------
 Install the gem with the command:
     
-    gem install kaltura_fu
+    # Gemfile
+    gem "kaltura_fu"
 Run: 
   
     rails g kaltura_fu:install
