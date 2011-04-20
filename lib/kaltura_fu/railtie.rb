@@ -9,7 +9,7 @@ module KalturaFu
     
       ActionView::Base.send :include, KalturaFu::ViewHelpers
 
-      kaltura_yml = File.join(RAILS_ROOT,'config','kaltura.yml')
+      kaltura_yml = File.join(Rails.root,'config','kaltura.yml')
 
       if File.exists?(kaltura_yml)
         config_file = YAML.load_file(kaltura_yml)[Rails.env]
