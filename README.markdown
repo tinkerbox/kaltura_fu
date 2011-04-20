@@ -23,7 +23,7 @@ Install the gem with the command:
     gem install kaltura_fu
 Run: 
   
-    script/generate kaltura_fu_install
+    rails g kaltura_fu:install
     
 This will install the kaltura.yml file into your application's config directory and the kaltura_upload.js into the application's public/javascripts directory.
 	
