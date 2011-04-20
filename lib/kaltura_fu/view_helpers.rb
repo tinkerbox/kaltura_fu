@@ -54,7 +54,7 @@ module KalturaFu
         seconds_parameter = "/vid_sec/5"
       end
       
-      image_tag("http://www.kaltura.com/p/#{KalturaFu.config[:partner_id]}" +
+      image_tag("#{KalturaFu.cofing[:service_url]}/p/#{KalturaFu.config[:partner_id]}" +
 		"/thumbnail/entry_id/#{entry_id}" + 
 		seconds_parameter + 
 		size_parameters)
@@ -119,7 +119,7 @@ module KalturaFu
           name: \"#{options[:div_id]}\"
       	};
 
-      	swfobject.embedSWF(\"http://www.kaltura.com/kwidget/wid/_#{KalturaFu.config[:partner_id]}" + player_conf_parameter + "\",\"#{options[:div_id]}\",\"#{width}\",\"#{height}\",\"10.0.0\",\"http://ttv.mit.edu/swfs/expressinstall.swf\",flashVars,params,attributes);
+      	swfobject.embedSWF(\"#{KalturaFu.config[:service_url]}/kwidget/wid/_#{KalturaFu.config[:partner_id]}" + player_conf_parameter + "\",\"#{options[:div_id]}\",\"#{width}\",\"#{height}\",\"10.0.0\",\"http://ttv.mit.edu/swfs/expressinstall.swf\",flashVars,params,attributes);
       </script>"
     end
     
@@ -155,7 +155,7 @@ module KalturaFu
     			maxTotalSize: \"999999999\"
     		};
 
-        swfobject.embedSWF(\"http://www.kaltura.com/kupload/ui_conf_id/1103\", \"uploader\", \"160\", \"26\", \"9.0.0\", \"expressInstall.swf\", flashVars, params,attributes);
+        swfobject.embedSWF(\"#{KalturaFu.config[:service_url]}/kupload/ui_conf_id/1103\", \"uploader\", \"160\", \"26\", \"9.0.0\", \"expressInstall.swf\", flashVars, params,attributes);
 
     	</script>"
     end
