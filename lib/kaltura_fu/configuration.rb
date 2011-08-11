@@ -108,11 +108,23 @@ module KalturaFu
     
   end
   
+  def self.client
+    Configuration.client
+  end
+  
   def self.config
     Configuration.instance
   end
   
   def self.configure
     yield config
+  end
+  
+  def self.generate_session_key
+    Configuration.generate_session_key
+  end
+  
+  def self.check_for_client_session
+    Configuration.check_for_client_session
   end
 end
