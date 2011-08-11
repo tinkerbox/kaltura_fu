@@ -1,3 +1,3 @@
 module KalturaFu
-  Version = '0.2.1'
+  VERSION = '1.0.0.beta1'
 end

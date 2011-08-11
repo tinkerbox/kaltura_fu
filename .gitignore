@@ -3,3 +3,4 @@ doc/**
 .svn
 .DS_Store
 spec/config/**
+*.gem

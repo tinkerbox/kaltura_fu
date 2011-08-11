@@ -1,15 +1,12 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-require 'kaltura_fu'
-require 'spec'
-require 'spec/autorun'
-require 'rubygems'
-require 'kaltura'
+
+Bundler.require
+
 require 'yaml'
 require 'active_support/core_ext/hash'
 
-Spec::Runner.configure do |config|
-  
+Rspec.configure do |config|
 end
 
 class KalturaFuTestConfiguration

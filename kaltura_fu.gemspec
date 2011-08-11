@@ -7,7 +7,7 @@ require 'kaltura_fu/version'
 
 Gem::Specification.new do |s|
   s.name = %q{kaltura_fu}
-  s.version = KalturaFu::Version.dup
+  s.version = KalturaFu::VERSION.dup
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Patrick Robertson"]
@@ -16,69 +16,16 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = [
     "README.markdown"
   ]
-  s.files = [
-    ".gitignore",
-     "MIT-LICENSE",
-     "README.markdown",
-     "Rakefile",
-     "VERSION.yml",
-     "install.rb",
-     "kaltura_fu.gemspec",
-     "lib/generators/kaltura_fu/install_generator.rb",
-     "lib/generators/templates/kaltura.yml",
-     "lib/generators/templates/kaltura_upload.js",
-     "lib/kaltura_fu.rb",
-     "lib/kaltura_fu/configuration.rb",
-     "lib/kaltura_fu/entry.rb",
-     "lib/kaltura_fu/entry/class_methods.rb",
-     "lib/kaltura_fu/entry/flavor.rb",
-     "lib/kaltura_fu/entry/instance_methods.rb",
-     "lib/kaltura_fu/entry/metadata.rb",
-     "lib/kaltura_fu/entry/metadata/class_and_instance_methods.rb",
-     "lib/kaltura_fu/entry/metadata/class_methods.rb",
-     "lib/kaltura_fu/railtie.rb",
-     "lib/kaltura_fu/version.rb",
-     "lib/kaltura_fu/view_helpers.rb",
-     "rails/init.rb",
-     "spec/debug.log",
-     "spec/entry_spec.rb",
-     "spec/flavor_spec.rb",
-     "spec/kaltura_fu_spec.rb",
-     "spec/metadata_spec.rb",
-     "spec/spec.opts",
-     "spec/spec_helper.rb",
-     "uninstall.rb"
-  ]
+  s.files = Dir['[A-Z]*','lib/**/*','rails/**/*','spec/**/*']
   s.homepage = %q{http://github.com/Velir/kaltura_fu}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Rails gem for making Kaltura integrations easier.}
-  s.test_files = [
-    "spec/entry_spec.rb",
-     "spec/flavor_spec.rb",
-     "spec/kaltura_fu_spec.rb",
-     "spec/metadata_spec.rb",
-     "spec/spec_helper.rb"
-  ]
-
-  if s.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
-    s.specification_version = 3
-
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_development_dependency(%q<rspec>, ["= 1.3.0"])
-      s.add_development_dependency(%q<activesupport>, [">= 0"])
-      s.add_runtime_dependency(%q<velir_kaltura-ruby>, [">= 0.4.3"])
-    else
-      s.add_dependency(%q<rspec>, ["= 1.3.0"])
-      s.add_dependency(%q<activesupport>, [">= 0"])
-      s.add_dependency(%q<velir_kaltura-ruby>, [">= 0.4.3"])
-    end
-  else
-    s.add_dependency(%q<rspec>, ["= 1.3.0"])
-    s.add_dependency(%q<activesupport>, [">= 0"])
-    s.add_dependency(%q<velir_kaltura-ruby>, [">= 0.4.3"])
-  end
+  s.test_files = Dir['spec/**/*']
+  s.add_dependency('velir_kaltura-ruby', '~> 0.4')
+  
+  s.add_development_dependency('rspec', '~> 2.6.0')
+  s.add_development_dependency('activesupport', '~> 3.0')
 end
 
