@@ -32,6 +32,7 @@ require 'rubygems'
 require 'kaltura'
 require 'active_support/all'
 require 'kaltura_fu/configuration'
+require 'kaltura_fu/session'
 
 module KalturaFu
   
@@ -51,4 +52,5 @@ module KalturaFu
       autoload :ClassAndInstanceMethods, 'kaltura_fu/entry/metadata/class_and_instance_methods'
     end
   end
+  extend Session
 end
