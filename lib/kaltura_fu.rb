@@ -31,13 +31,12 @@
 require 'rubygems'
 require 'kaltura'
 require 'active_support/all'
+require 'kaltura_fu/configuration'
 
 module KalturaFu
   
   #Initilize the configuration and send the ViewHelpers into ActionView::Base when it's a Rails 3 app.
   require 'kaltura_fu/railtie' if defined?(Rails) && Rails.version.split(".").first == "3"
-  
-  autoload :Configuration, 'kaltura_fu/configuration'
   autoload :Entry, 'kaltura_fu/entry'
   
   module Entry
