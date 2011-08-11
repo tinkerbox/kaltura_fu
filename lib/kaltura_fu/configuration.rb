@@ -57,9 +57,8 @@ module KalturaFu
     def self.create_client_config
       raise "Missing Partner Identifier" unless @@defaults[:partner_id]
       @@client_configuration = Kaltura::Configuration.new(@@defaults[:partner_id])
-      unless @@defaults[:service_url].nil?
-        @@client_configuration.service_url = @@defaults[:service_url]
-      end
+      @@client_configuration.service_url = @@defaults[:service_url]
+      
       @@client_configuration
     end
 
@@ -85,7 +84,10 @@ module KalturaFu
       raise "Missing Administrator Secret" unless @@defaults[:administrator_secret]
       @@session_key = @@client.session_service.start(@@defaults[:administrator_secret],'',Kaltura::Constants::SessionType::ADMIN)
       @@client.ks = @@session_key
+    rescue Kaltura::APIError => e
+      puts e.message      
     end
+    
     ##
     # Clears the current Kaltura ks.
     ##
