@@ -2,6 +2,7 @@ require 'singleton'
 
 module KalturaFu
   class Configuration
+    include Singleton
   
     @@defaults = {
       :login_email => 'USER_EMAIL',
@@ -26,6 +27,10 @@ module KalturaFu
     def self.defaults
       @@defaults
     end
+    
+    def initialize
+      @@defaults.each_pair{|k,v| self.send("#{k}=",v)}
+    end    
     
     def self.client
       @@client ||= nil
