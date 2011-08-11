@@ -52,6 +52,4 @@ module KalturaFu
       autoload :ClassAndInstanceMethods, 'kaltura_fu/entry/metadata/class_and_instance_methods'
     end
   end
-  
-  extend Configuration
 end
