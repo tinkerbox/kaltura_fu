@@ -93,8 +93,8 @@ module KalturaFu
       unless options[:player_conf_id].nil?
         player_conf_parameter += "#{options[:player_conf_id]}"
       else
-        unless KalturaFu.config[:player_conf_id].nil?
-          player_conf_parameter += "#{KalturaFu.config[:player_conf_id]}"
+        unless KalturaFu.config.player_conf_id.nil?
+          player_conf_parameter += "#{KalturaFu.config.player_conf_id}"
 	      else
 	        player_conf_parameter += "#{DEFAULT_KPLAYER}"
         end
@@ -119,7 +119,7 @@ module KalturaFu
           name: \"#{options[:div_id]}\"
       	};
 
-      	swfobject.embedSWF(\"#{KalturaFu.config[:service_url]}/kwidget/wid/_#{KalturaFu.config[:partner_id]}" + player_conf_parameter + "\",\"#{options[:div_id]}\",\"#{width}\",\"#{height}\",\"10.0.0\",\"http://ttv.mit.edu/swfs/expressinstall.swf\",flashVars,params,attributes);
+      	swfobject.embedSWF(\"#{KalturaFu.config.service_url}/kwidget/wid/_#{KalturaFu.config.partner_id}" + player_conf_parameter + "\",\"#{options[:div_id]}\",\"#{width}\",\"#{height}\",\"10.0.0\",\"http://ttv.mit.edu/swfs/expressinstall.swf\",flashVars,params,attributes);
       </script>"
     end
     
