@@ -145,8 +145,8 @@ module KalturaFu
     		};
     		var flashVars = {
     			uid: \"ANONYMOUS\",
-    			partnerId: \"#{KalturaFu.config[:partner_id]}\",
-    			subPId: \"#{KalturaFu.config[:subpartner_id]}\",
+    			partnerId: \"#{KalturaFu.config.partner_id}\",
+    			subPId: \"#{KalturaFu.config.partner_id}00\",
     			entryId: \"-1\",
     			ks: \"#{KalturaFu.session_key}\",
     			uiConfId: '1103',
@@ -155,7 +155,7 @@ module KalturaFu
     			maxTotalSize: \"999999999\"
     		};
 
-        swfobject.embedSWF(\"#{KalturaFu.config[:service_url]}/kupload/ui_conf_id/1103\", \"uploader\", \"160\", \"26\", \"9.0.0\", \"expressInstall.swf\", flashVars, params,attributes);
+        swfobject.embedSWF(\"#{KalturaFu.config.service_url}/kupload/ui_conf_id/1103\", \"uploader\", \"160\", \"26\", \"9.0.0\", \"expressInstall.swf\", flashVars, params,attributes);
 
     	</script>"
     end
