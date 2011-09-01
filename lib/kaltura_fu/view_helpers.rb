@@ -149,13 +149,13 @@ module KalturaFu
     			subPId: \"#{KalturaFu.config.partner_id}00\",
     			entryId: \"-1\",
     			ks: \"#{KalturaFu.session_key}\",
-    			uiConfId: '1103',
+    			uiConfId: '4211621',
     			jsDelegate: \"delegate\",
     			maxFileSize: \"999999999\",
     			maxTotalSize: \"999999999\"
     		};
 
-        swfobject.embedSWF(\"#{KalturaFu.config.service_url}/kupload/ui_conf_id/1103\", \"uploader\", \"160\", \"26\", \"9.0.0\", \"expressInstall.swf\", flashVars, params,attributes);
+        swfobject.embedSWF(\"#{KalturaFu.config.service_url}/kupload/ui_conf_id/4211621\", \"uploader\", \"160\", \"26\", \"9.0.0\", \"expressInstall.swf\", flashVars, params,attributes);
 
     	</script>"
     end
