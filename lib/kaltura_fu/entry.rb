@@ -1,3 +1,8 @@
+require 'kaltura_fu/entry/metadata'
+require 'kaltura_fu/entry/class_methods'
+require 'kaltura_fu/entry/instance_methods'
+require 'kaltura_fu/entry/flavor'
+
 module KalturaFu
   
   ##

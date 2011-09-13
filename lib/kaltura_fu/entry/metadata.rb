@@ -1,4 +1,6 @@
 require 'active_support'
+require 'kaltura_fu/entry/metadata/class_methods'
+require 'kaltura_fu/entry/metadata/class_and_instance_methods'
 
 module KalturaFu
   module Entry
@@ -45,10 +47,10 @@ module KalturaFu
       ##
       def respond_to?(method)
         case method.to_s
-          when /^(get|set)_(.*)/
-            valid_entry_attribute?($2.to_sym) || super
-          when /^(add)_(.*)/
-            (valid_entry_attribute?($2.pluralize.to_sym) && valid_add_attribute?($2) ) || super
+        when /^(get|set)_(.*)/
+          valid_entry_attribute?($2.to_sym) || super
+        when /^(add)_(.*)/
+          (valid_entry_attribute?($2.pluralize.to_sym) && valid_add_attribute?($2) ) || super
         else
           super
         end         
@@ -64,7 +66,6 @@ module KalturaFu
       ##
       def get_entry(entry_id)  
         KalturaFu.check_for_client_session
-
         KalturaFu.client.media_service.get(entry_id)      
       end
       

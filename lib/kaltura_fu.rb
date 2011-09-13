@@ -33,24 +33,13 @@ require 'kaltura'
 require 'active_support/all'
 require 'kaltura_fu/configuration'
 require 'kaltura_fu/session'
+require 'kaltura_fu/entry'
+
+
 
 module KalturaFu
-  
   #Initilize the configuration and send the ViewHelpers into ActionView::Base when it's a Rails 3 app.
   require 'kaltura_fu/railtie' if defined?(Rails) && Rails.version.split(".").first == "3"
-  autoload :Entry, 'kaltura_fu/entry'
   
-  module Entry
-    
-    autoload :Metadata, 'kaltura_fu/entry/metadata'
-    autoload :ClassMethods, 'kaltura_fu/entry/class_methods'
-    autoload :InstanceMethods, 'kaltura_fu/entry/instance_methods'
-    autoload :Flavor, 'kaltura_fu/entry/flavor'
-      
-    module Metadata
-      autoload :ClassMethods, 'kaltura_fu/entry/metadata/class_methods'
-      autoload :ClassAndInstanceMethods, 'kaltura_fu/entry/metadata/class_and_instance_methods'
-    end
-  end
   extend Session
 end

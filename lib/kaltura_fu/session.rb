@@ -5,21 +5,21 @@ module KalturaFu
     @@client_configuration = nil #Configuration values for the @@client.
     @@session_key = nil #The Kaltura ks to use.
 
-    def client
+    def self.client
       @@client ||= nil
     end
 
-    def client=(value)
+    def self.client=(value)
       @@client = value
     end
 
-    def client_configuration
+    def self.client_configuration
       @@client_configuration ||= nil
     end
-    def client_configuration=(value)
+    def self.client_configuration=(value)
       @@client_configuration = value
     end
-    def session_key
+    def self.session_key
       @@session_key ||=nil
     end
 
