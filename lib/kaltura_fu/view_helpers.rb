@@ -148,7 +148,7 @@ module KalturaFu
     			partnerId: \"#{KalturaFu.config.partner_id}\",
     			subPId: \"#{KalturaFu.config.partner_id}00\",
     			entryId: \"-1\",
-    			ks: \"#{KalturaFu.session_key}\",
+    			ks: \"#{KalturaFu::Session.session_key}\",
     			uiConfId: '4211621',
     			jsDelegate: \"delegate\",
     			maxFileSize: \"999999999\",
