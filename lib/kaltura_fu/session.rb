@@ -74,7 +74,6 @@ module KalturaFu
     def check_for_client_session
       if @@client.nil?
         self.create_client
-        self.generate_session_key
         true
       else
         true
