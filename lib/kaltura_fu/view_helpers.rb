@@ -106,7 +106,8 @@ module KalturaFu
       		allowscriptaccess: \"always\",
       		allownetworking: \"all\",
       		allowfullscreen: \"true\",
-      		wmode: \"opaque\"
+      		wmode: \"opaque\",
+      		bgcolor: \"#000000\"
       	};
       	var flashVars = {};
       	flashVars.sourceType = \"#{source_type}\";      	  
