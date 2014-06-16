@@ -18,8 +18,7 @@ module KalturaFu
     ##
     def include_kaltura_fu(*args)
       content = javascript_include_tag('kaltura_upload')
-      content << "\n#{javascript_include_tag('http://ajax.googleapis.com' + 
-		 '/ajax/libs/swfobject/2.2/swfobject.js')}" 
+      content << javascript_include_tag('//ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js')
     end
     
     ##
@@ -38,13 +37,13 @@ module KalturaFu
       
       unless options[:size].empty?
         size_parameters = "/width/#{options[:size].first}/height/" +
-			  "#{options[:size].last}"
+        "#{options[:size].last}"
       else
         # if the thumbnail width and height are defined in the config,
-	      # use it, assuming it wasn't locally overriden
+        # use it, assuming it wasn't locally overriden
         if KalturaFu.config[:thumb_width] && KalturaFu.config[:thumb_height]
           size_parameters = "/width/#{KalturaFu.config[:thumb_width]}/height/" +
-			    "#{KalturaFu.config[:thumb_height]}"
+          "#{KalturaFu.config[:thumb_height]}"
         end
       end
       
@@ -55,11 +54,11 @@ module KalturaFu
       end
       
       image_tag("#{KalturaFu.config[:service_url]}/p/#{KalturaFu.config[:partner_id]}" +
-		"/thumbnail/entry_id/#{entry_id}" + 
-		seconds_parameter + 
-		size_parameters)
+    "/thumbnail/entry_id/#{entry_id}" +
+    seconds_parameter +
+    size_parameters)
     end
-    
+
     ##
     # Returns the code needed to embed a KDPv3 player.
     #
@@ -73,7 +72,7 @@ module KalturaFu
     # @return [String] returns a string representation of the html/javascript necessary to play a Kaltura entry.
     ##
     def kaltura_player_embed(entry_id,options={})
-      player_conf_parameter = "/ui_conf_id/"
+      player_conf_parameter = "/uiconf_id/"
       options[:div_id] ||= "kplayer"
       options[:size] ||= []
       options[:use_url] ||= false
@@ -82,8 +81,8 @@ module KalturaFu
       source_type = "entryId"
 
       unless options[:size].empty?
-	      width = options[:size].first
-	      height = options[:size].last
+        width = options[:size].first
+        height = options[:size].last
       end
         
       if options[:use_url] == true
@@ -95,33 +94,33 @@ module KalturaFu
       else
         unless KalturaFu.config.player_conf_id.nil?
           player_conf_parameter += "#{KalturaFu.config.player_conf_id}"
-	      else
-	        player_conf_parameter += "#{DEFAULT_KPLAYER}"
+        else
+          player_conf_parameter += "#{DEFAULT_KPLAYER}"
         end
       end
       
       "<div id=\"#{options[:div_id]}\"></div>
       <script type=\"text/javascript\">
-      	var params= {
-      		allowscriptaccess: \"always\",
-      		allownetworking: \"all\",
-      		allowfullscreen: \"true\",
-      		wmode: \"opaque\",
-      		bgcolor: \"#000000\"
-      	};
-      	var flashVars = {};
-      	flashVars.sourceType = \"#{source_type}\";      	  
-      	flashVars.entryId = \"#{entry_id}\";
-      	flashVars.emptyF = \"onKdpEmpty\";
-    		flashVars.readyF = \"onKdpReady\";
-      		
-      	var attributes = {
+        var params= {
+          allowscriptaccess: \"always\",
+          allownetworking: \"all\",
+          allowfullscreen: \"true\",
+          wmode: \"opaque\",
+          bgcolor: \"#000000\"
+        };
+        var flashVars = {};
+        flashVars.sourceType = \"#{source_type}\";
+        flashVars.entryId = \"#{entry_id}\";
+        flashVars.emptyF = \"onKdpEmpty\";
+        flashVars.readyF = \"onKdpReady\";
+
+        var attributes = {
           id: \"#{options[:div_id]}\",
           name: \"#{options[:div_id]}\"
-      	};
+        };
 
-      	swfobject.embedSWF(\"#{KalturaFu.config.service_url}/kwidget/wid/_#{KalturaFu.config.partner_id}" + player_conf_parameter + "\",\"#{options[:div_id]}\",\"#{width}\",\"#{height}\",\"10.0.0\",\"http://ttv.mit.edu/swfs/expressinstall.swf\",flashVars,params,attributes);
-      </script>"
+        swfobject.embedSWF(\"#{KalturaFu.config.service_url}/kwidget/wid/_#{KalturaFu.config.partner_id}" + player_conf_parameter + "\",\"#{options[:div_id]}\",\"#{width}\",\"#{height}\",\"10.0.0\",\"http://ttv.mit.edu/swfs/expressinstall.swf\",flashVars,params,attributes);
+      </script>".html_safe
     end
     
     ##
@@ -133,34 +132,34 @@ module KalturaFu
     def kaltura_upload_embed(options={})
       options[:div_id] ||="uploader"
       "<div id=\"#{options[:div_id]}\"></div>
-    		<script type=\"text/javascript\">
+        <script type=\"text/javascript\">
 
-    		var params = {
-    			allowScriptAccess: \"always\",
-    			allowNetworking: \"all\",
-    			wmode: \"transparent\"
-    		};
-    		var attributes = {
-    			id: \"uploader\",
-    			name: \"KUpload\"
-    		};
-    		var flashVars = {
-    			uid: \"ANONYMOUS\",
-    			partnerId: \"#{KalturaFu.config.partner_id}\",
-    			subPId: \"#{KalturaFu.config.partner_id}00\",
-    			entryId: \"-1\",
-    			ks: \"#{KalturaFu::Session.session_key}\",
-    			uiConfId: '4211621',
-    			jsDelegate: \"delegate\",
-    			maxFileSize: \"999999999\",
-    			maxTotalSize: \"999999999\"
-    		};
+        var params = {
+          allowScriptAccess: \"always\",
+          allowNetworking: \"all\",
+          wmode: \"transparent\"
+        };
+        var attributes = {
+          id: \"uploader\",
+          name: \"KUpload\"
+        };
+        var flashVars = {
+          uid: \"ANONYMOUS\",
+          partnerId: \"#{KalturaFu.config.partner_id}\",
+          subPId: \"#{KalturaFu.config.partner_id}00\",
+          entryId: \"-1\",
+          ks: \"#{KalturaFu::Session.session_key}\",
+          uiConfId: '4211621',
+          jsDelegate: \"delegate\",
+          maxFileSize: \"999999999\",
+          maxTotalSize: \"999999999\"
+        };
 
         swfobject.embedSWF(\"#{KalturaFu.config.service_url}/kupload/ui_conf_id/4211621\", \"uploader\", \"160\", \"26\", \"9.0.0\", \"expressInstall.swf\", flashVars, params,attributes);
 
-    	</script>"
+      </script>".html_safe
     end
-    
+
     ##
     # Creates a link_to tag that seeks to a certain time on a KDPv3 player.
     #
