@@ -38,8 +38,8 @@ require 'kaltura_fu/entry'
 
 
 module KalturaFu
-  #Initilize the configuration and send the ViewHelpers into ActionView::Base when it's a Rails 3 app.
-  require 'kaltura_fu/railtie' if defined?(Rails) && Rails.version.split(".").first == "3"
+  #Initilize the configuration and send the ViewHelpers into ActionView::Base when it's a Rails 3 and above app.
+  require 'kaltura_fu/railtie' if defined?(Rails) && Rails.version.split(".").first > "2"
   
   extend Session
 end
