@@ -41,9 +41,9 @@ module KalturaFu
       else
         # if the thumbnail width and height are defined in the config,
         # use it, assuming it wasn't locally overriden
-        if KalturaFu.config[:thumb_width] && KalturaFu.config[:thumb_height]
-          size_parameters = "/width/#{KalturaFu.config[:thumb_width]}/height/" +
-          "#{KalturaFu.config[:thumb_height]}"
+        if KalturaFu.config.thumb_width && KalturaFu.config.thumb_height
+          size_parameters = "/width/#{KalturaFu.config.thumb_width}/height/" +
+          "#{KalturaFu.config.thumb_height}"
         end
       end
       
@@ -53,7 +53,7 @@ module KalturaFu
         seconds_parameter = "/vid_sec/5"
       end
       
-      image_tag("#{KalturaFu.config[:service_url]}/p/#{KalturaFu.config[:partner_id]}" +
+      image_tag("#{KalturaFu.config.service_url}/p/#{KalturaFu.config.partner_id}" +
     "/thumbnail/entry_id/#{entry_id}" +
     seconds_parameter +
     size_parameters)
