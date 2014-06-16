@@ -54,7 +54,7 @@ module KalturaFu
         seconds_parameter = "/vid_sec/5"
       end
       
-      image_tag("#{KalturaFu.cofing[:service_url]}/p/#{KalturaFu.config[:partner_id]}" +
+      image_tag("#{KalturaFu.config[:service_url]}/p/#{KalturaFu.config[:partner_id]}" +
 		"/thumbnail/entry_id/#{entry_id}" + 
 		seconds_parameter + 
 		size_parameters)
