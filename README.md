@@ -30,7 +30,9 @@ This will install the `kaltura_fu.rb` file into your application's config/initia
 
 Configuration:
 --------------
-Update `config/initializers/kaltura_fu.rb` accordingly.
+Obtain your Kaltura API publisher credentials via the [KMC Integration Settings](http://www.kaltura.com/index.php/kmc/kmc4#account|integration)
+
+And update `config/initializers/kaltura_fu.rb` accordingly.
 
 Testing:
 --------

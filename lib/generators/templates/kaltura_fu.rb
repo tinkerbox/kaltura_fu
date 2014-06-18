@@ -1,6 +1,8 @@
 # Set up the following configuration with environment variables (Recommended)
-# You should be able to get most of the values from Kaltura under
-# Settings -> Integration Settings.
+#
+# Obtain your Kaltura API publisher credentials via the KMC Integration Settings
+# http://www.kaltura.com/index.php/kmc/kmc4#account|integration
+#
 
 KalturaFu.configure do |config|
   config.login_email = ENV["USER_EMAIL"]

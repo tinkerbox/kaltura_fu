@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.summary = %q{Rails gem for making Kaltura integrations easier.}
   s.test_files = Dir['spec/**/*']
   s.add_dependency('velir_kaltura-ruby', '~> 0.4')
-  
+
   s.add_development_dependency('rspec', '~> 2.6.0')
   s.add_development_dependency('activesupport', '~> 3.0')
 end
