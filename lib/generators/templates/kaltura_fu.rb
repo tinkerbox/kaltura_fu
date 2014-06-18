@@ -1,3 +1,7 @@
+# Set up the following configuration with environment variables (Recommended)
+# You should be able to get most of the values from Kaltura under
+# Settings -> Integration Settings.
+
 KalturaFu.configure do |config|
   config.login_email = ENV["USER_EMAIL"]
   config.login_password = ENV["THE_PASSWORD"]
