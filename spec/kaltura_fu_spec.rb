@@ -39,9 +39,9 @@ describe "General Configuration testing" do
   end
 end
 describe "Valid Configuration tests" do
-  before :each do 
-    KalturaFuTestConfiguration.setup
-  end
+  # before :each do 
+  #   KalturaFuTestConfiguration.setup
+  # end
   
   it "Should function just fine with proper credentials" do
     lambda {KalturaFu.generate_session_key}.should_not raise_error

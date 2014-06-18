@@ -9,13 +9,13 @@ class EntryUploader
 end
 
 describe "Actions on an entries metadata" do
-  before(:all) do
-    KalturaFuTestConfiguration.setup
-  end
+  # before(:all) do
+  #   KalturaFuTestConfiguration.setup
+  # end
   
-  before(:each) do 
-    @entry_id = EntryUploader.upload(KalturaFuTestConfiguration.video,:source=>:file)
-  end
+  # before(:each) do 
+  #   @entry_id = EntryUploader.upload(KalturaFuTestConfiguration.video,:source=>:file)
+  # end
   
   after(:each) do
     EntryUploader.new.delete_entry(@entry_id)

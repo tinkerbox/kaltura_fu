@@ -5,7 +5,7 @@ module KalturaFu
       desc "Copies the Kaltura config file and upload JS to your app."
             
       def copy_config
-        copy_file "kaltura.yml", "config/kaltura.yml"
+        copy_file "kaltura_fu.rb", "config/initializers/kaltura_fu.rb"
       end
       
       def copy_javascript

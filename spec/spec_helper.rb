@@ -3,23 +3,20 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 
 Bundler.require
 
-require 'yaml'
-require 'active_support/core_ext/hash'
-
-Rspec.configure do |config|
+RSpec.configure do |config|
 end
 
-class KalturaFuTestConfiguration
-  def self.setup
-    kaltura_yml = File.join(File.dirname(__FILE__),'config','kaltura.yml')
-    KalturaFu.config = YAML.load_file(kaltura_yml).symbolize_keys
-    
-    #remove any lingering and possibly incorrect client information
-    KalturaFu.client = nil
-    KalturaFu.client_configuration = nil
-  end
+# class KalturaFuTestConfiguration
+#   def self.setup
+#     # kaltura_yml = File.join(File.dirname(__FILE__),'config','kaltura.yml')
+#     # KalturaFu.config = YAML.load_file(kaltura_yml).symbolize_keys
+
+#     #remove any lingering and possibly incorrect client information
+#     KalturaFu.client = nil
+#     KalturaFu.client_configuration = nil
+#   end
   
-  def self.video
-    File.open(File.join(File.dirname(__FILE__),'config','video.flv'))
-  end
-end
+#   def self.video
+#     File.open(File.join(File.dirname(__FILE__),'config','video.flv'))
+#   end
+# end

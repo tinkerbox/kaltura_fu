@@ -103,8 +103,8 @@ module KalturaFu
       def original_download_url(video_id)
         KalturaFu.check_for_client_session
         
-        service_url = KalturaFu.config[:service_url] || "http://www.kaltura.com"
-        partner_id = KalturaFu.config[:partner_id]
+        service_url = KalturaFu.config.service_url || "http://www.kaltura.com"
+        partner_id = KalturaFu.config.partner_id
         subpartner_id = (partner_id.to_i * 100).to_s
         flavor = original_flavor(video_id)
         extension = original_file_extension(video_id)

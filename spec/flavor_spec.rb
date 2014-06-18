@@ -9,13 +9,13 @@ class EntryUploader
 end
 
 describe "Actions specific to an entries flavors" do
-  before(:all) do
-    KalturaFuTestConfiguration.setup
-  end
+  # before(:all) do
+  #   KalturaFuTestConfiguration.setup
+  # end
   
-  before(:each) do 
-    @entry_id = EntryUploader.upload(KalturaFuTestConfiguration.video,:source=>:file)
-  end
+  # before(:each) do 
+  #   @entry_id = EntryUploader.upload(KalturaFuTestConfiguration.video,:source=>:file)
+  # end
   
   after(:each) do
     EntryUploader.new.delete_entry(@entry_id)
@@ -74,18 +74,18 @@ describe "Actions specific to an entries flavors" do
     flavor = FlavorSpecTester.new
     
     url = flavor.original_download_url(@entry_id)
-    test_url = "#{KalturaFu.config[:service_url]}/p/#{KalturaFu.config[:partner_id]}/sp/#{KalturaFu.config[:subpartner_id]}/serveFlavor/flavorId/#{flavor.original_flavor(@entry_id)}/name/#{flavor.original_flavor(@entry_id)}.#{flavor.original_file_extension(@entry_id)}?novar=0"
+    test_url = "#{KalturaFu.config.service_url}/p/#{KalturaFu.config.partner_id}/sp/#{KalturaFu.config.subpartner_id}/serveFlavor/flavorId/#{flavor.original_flavor(@entry_id)}/name/#{flavor.original_flavor(@entry_id)}.#{flavor.original_file_extension(@entry_id)}?novar=0"
     url.should == test_url
   end
   
   it "should respond to changes in service_url" do
     flavor = FlavorSpecTester.new
-    old_service_url = KalturaFu.config[:service_url]
-    KalturaFu.config[:service_url] = "http://www.waffles.com"
+    old_service_url = KalturaFu.config.service_url
+    KalturaFu.config.service_url = "http://www.waffles.com"
     
     url = flavor.original_download_url(@entry_id)
-    test_url = "http://www.waffles.com/p/#{KalturaFu.config[:partner_id]}/sp/#{KalturaFu.config[:subpartner_id]}/serveFlavor/flavorId/#{flavor.original_flavor(@entry_id)}/name/#{flavor.original_flavor(@entry_id)}.#{flavor.original_file_extension(@entry_id)}?novar=0"
-    KalturaFu.config[:service_url] = old_service_url
+    test_url = "http://www.waffles.com/p/#{KalturaFu.config.partner_id}/sp/#{KalturaFu.config.subpartner_id}/serveFlavor/flavorId/#{flavor.original_flavor(@entry_id)}/name/#{flavor.original_flavor(@entry_id)}.#{flavor.original_file_extension(@entry_id)}?novar=0"
+    KalturaFu.config.service_url = old_service_url
     url.should == test_url
   end
 end
